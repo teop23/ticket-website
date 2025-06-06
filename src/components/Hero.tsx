@@ -25,7 +25,7 @@ export const Hero: React.FC = () => {
 
   return (
     <section 
-      className="relative flex items-center overflow-hidden pt-8" 
+      className="relative flex items-center overflow-hidden" 
       style={{ height: `calc(100vh - ${navHeight}px)` }}
     >
       {/* Background Elements */}
@@ -36,11 +36,11 @@ export const Hero: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <img 
             src={ticketLogo}
             alt="Power Millions"
-            className="w-32 mx-auto mb-4 hover-scale"
+            className="w-40 mx-auto mb-3 hover-scale"
           />
           <h1 className="text-4xl md:text-6xl font-extrabold text-red-600 mb-6 leading-[1.2]">
             Win Big Every Hour
@@ -48,12 +48,12 @@ export const Hero: React.FC = () => {
           <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-6">
             {hero.description}
           </p>
-          <button className="btn-primary mb-8">
+          <button className="btn-primary">
             Buy $TICKET Now
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto"
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Next Drawing */}
           <div className="glass-card rounded-2xl p-3 hover-scale flex flex-col justify-center">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 text-center">Next Drawing</h3>
