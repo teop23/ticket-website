@@ -32,22 +32,22 @@ export const Hero: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Next Drawing */}
           <div className="glass-card rounded-2xl p-6 hover-scale">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Next Drawing</h3>
-            <p className="text-gray-600 mb-4">{hero.nextDrawing.date}</p>
-            <div className="flex justify-center gap-2">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 text-center">Next Drawing</h3>
+            <p className="text-gray-600 mb-6 text-center text-lg">{hero.nextDrawing.date}</p>
+            <div className="flex justify-center gap-3">
               <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg px-4 py-3">
-                <span className="text-3xl font-bold text-white">{hero.nextDrawing.time.hours}</span>
+                <span className="text-4xl font-bold text-white">{hero.nextDrawing.time.hours}</span>
               </div>
-              <div className="text-gray-900 text-3xl font-bold">:</div>
+              <div className="text-gray-900 text-4xl font-bold self-center">:</div>
               <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg px-4 py-3">
-                <span className="text-3xl font-bold text-white">{hero.nextDrawing.time.minutes}</span>
+                <span className="text-4xl font-bold text-white">{hero.nextDrawing.time.minutes}</span>
               </div>
-              <div className="text-gray-900 text-3xl font-bold">:</div>
+              <div className="text-gray-900 text-4xl font-bold self-center">:</div>
               <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg px-4 py-3">
-                <span className="text-3xl font-bold text-white">{hero.nextDrawing.time.seconds}</span>
+                <span className="text-4xl font-bold text-white">{hero.nextDrawing.time.seconds}</span>
               </div>
             </div>
-            <p className="text-center text-gray-500 text-sm mt-4">Results announced shortly after drawing</p>
+            <p className="text-center text-gray-500 text-base mt-6">Results announced shortly after drawing</p>
           </div>
           
           {/* Estimated Jackpot */}
