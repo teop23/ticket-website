@@ -16,9 +16,9 @@ export const Hero: React.FC = () => {
           <img 
             src="/src/assets/ticket_logo_cropped_transparent.png"
             alt="Power Millions"
-            className="w-48 mx-auto mb-4 hover-scale"
+            className="w-64 mx-auto mb-4 hover-scale"
           />
-          <h1 className="text-4xl md:text-6xl font-extrabold gradient-text mb-6 leading-[1.2]">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-red-600 mb-6 leading-[1.2]">
             Win Big Every Hour
           </h1>
           <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">
@@ -71,7 +71,7 @@ export const Hero: React.FC = () => {
                     <div className="text-sm font-medium text-gray-800">{winner.address}</div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold gradient-text">{winner.amount}</div>
+                    <div className="text-lg font-bold text-red-600">{winner.amount}</div>
                     <div className="text-sm text-gray-600">{winner.solAmount} SOL</div>
                   </div>
                 </div>
@@ -79,7 +79,7 @@ export const Hero: React.FC = () => {
             </div>
             
             <div className="mt-4 text-center">
-              <a href="#winners" className="gradient-text font-medium hover:opacity-80 transition-opacity">
+              <a href="#winners" className="text-red-600 font-medium hover:opacity-80 transition-opacity">
                 View All Winners →
               </a>
             </div>
