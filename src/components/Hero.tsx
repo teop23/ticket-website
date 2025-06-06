@@ -18,7 +18,7 @@ export const Hero: React.FC = () => {
             alt="Power Millions"
             className="w-48 mx-auto mb-4 hover-scale"
           />
-          <h1 className="text-4xl md:text-6xl font-extrabold gradient-text mb-6 leading-relaxed">
+          <h1 className="text-4xl md:text-6xl font-extrabold gradient-text mb-6 leading-[1.2]">
             Win Big Every Hour
           </h1>
           <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">
