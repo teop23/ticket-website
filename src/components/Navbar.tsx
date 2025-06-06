@@ -31,9 +31,7 @@ export const Navbar: React.FC = () => {
               <a 
                 key={item.label} 
                 href={item.href}
-                className={`font-medium text-lg transition-all duration-300 ${
-                  isScrolled ? 'text-gray-800 hover:text-red-600' : 'text-gray-100 hover:text-white'
-                } text-shadow`}
+                className="font-medium text-lg text-white hover:text-red-400 transition-all duration-300"
               >
                 {item.label}
               </a>
@@ -42,7 +40,7 @@ export const Navbar: React.FC = () => {
           
           {/* Mobile Menu Button */}
           <button 
-            className={`md:hidden ${isScrolled ? 'text-gray-800' : 'text-white'}`}
+            className="md:hidden text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <Menu />
@@ -57,9 +55,7 @@ export const Navbar: React.FC = () => {
                 <a 
                   key={item.label} 
                   href={item.href}
-                  className={`font-medium text-lg transition-colors ${
-                    isScrolled ? 'text-gray-800 hover:text-red-600' : 'text-gray-100 hover:text-white'
-                  } text-shadow`}
+                  className="font-medium text-lg text-white hover:text-red-400 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
