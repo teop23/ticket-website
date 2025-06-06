@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, ShieldCheck } from 'lucide-react';
 
 interface Winner {
   date_added: string;
@@ -27,12 +27,22 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
   return (
     <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-red-600">Recent Winners</h2>
-          <div className="text-gray-600">
+          {winners.length > 0 && <div className="text-gray-600 mt-2 md:mt-0">
             Showing {Math.min(winnersPerPage, winners.length - indexOfFirstWinner)} of {winners.length} distributions
-          </div>
+          </div>}
         </div>
+        
+        {winners.length === 0 ? (
+          <div className="bg-white rounded-xl p-12 text-center shadow-lg border border-gray-200">
+            <ShieldCheck size={48} className="text-red-600/50 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No Winners Yet</h3>
+            <p className="text-gray-600 max-w-md mx-auto">
+              The first drawing will happen soon. Make sure you hold enough $TICKET tokens to be eligible!
+            </p>
+          </div>
+        ) : (
         <div className="bg-white rounded-xl overflow-hidden mb-4 shadow-lg border border-gray-200">
           <table className="w-full">
             <thead>
@@ -128,6 +138,7 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
             </button>
           </div>
         </div>
+        )}
       </div>
     </section>
   );

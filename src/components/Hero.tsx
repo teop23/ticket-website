@@ -69,7 +69,7 @@ export const Hero: React.FC = () => {
           <div className="glass-card rounded-2xl p-6 hover-scale">
             <h3 className="text-xl font-bold text-gray-900 mb-4">Last 3 Winners</h3>
             <div className="space-y-4">
-              {winners.map((winner, index) => (
+              {winners.length > 0 ? winners.map((winner, index) => (
                 <div key={index} className="flex justify-between items-start p-3 bg-white/50 rounded-lg">
                   <div>
                     <div className="flex items-center gap-2">
@@ -91,7 +91,13 @@ export const Hero: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+              )) : (
+                <div className="text-center py-8">
+                  <ShieldCheck size={32} className="text-red-600/50 mx-auto mb-3" />
+                  <p className="text-gray-500">No winners yet. Be the first!</p>
+                  <p className="text-sm text-gray-400 mt-1">Next draw coming soon</p>
+                </div>
+              )}
             </div>
             
             <div className="mt-4 text-center">
