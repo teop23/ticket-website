@@ -57,14 +57,16 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
               {currentWinners.map((winner, index) => (
                 <tr key={index} className="border-b border-gray-100 text-gray-700 hover:bg-gray-50 transition-colors">
                   <td className="py-4 px-6">
-                    {new Date(winner.date_added).toLocaleString()}
+                    <span className="whitespace-nowrap">
+                      {new Date(winner.date_added).toLocaleString()}
+                    </span>
                   </td>
                   <td className="py-4 px-6">
                     <a 
                       href={`https://solscan.io/account/${winner.data.split(',')[0]}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3 py-1 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition-colors group font-mono break-all max-w-[400px]"
+                      className="text-red-600 hover:text-red-700 transition-colors font-mono break-all max-w-[400px] inline-flex items-center gap-2"
                     >
                       <span className="text-sm">
                         {winner.data.split(',')[0]}

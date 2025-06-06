@@ -75,12 +75,19 @@ export const Hero: React.FC = () => {
                   <div>
                     <div className="flex items-center gap-2">
                       <ShieldCheck size={16} className="text-red-600" />
-                      <div className="text-xs text-gray-500">
-                        {new Date(winner.date_added).toLocaleDateString()}
+                      <div className="text-xs text-gray-500 whitespace-nowrap">
+                        {new Date(winner.date_added).toLocaleString()}
                       </div>
                     </div>
-                    <div className="text-sm font-medium text-gray-800 font-mono break-all pr-2">
-                      {winner.data.split(',')[0]}
+                    <div className="text-sm font-medium font-mono break-all pr-2">
+                      <a 
+                        href={`https://solscan.io/account/${winner.data.split(',')[0]}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-red-600 hover:text-red-700 transition-colors"
+                      >
+                        {winner.data.split(',')[0]}
+                      </a>
                     </div>
                   </div>
                   <div className="text-right">
