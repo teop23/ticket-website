@@ -51,7 +51,7 @@ export const Hero: React.FC = () => {
           </div>
           
           {/* Estimated Jackpot */}
-          <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+          <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300 flex flex-col justify-center min-h-[300px]">
             <h3 className="text-xl font-bold text-white mb-4">ESTIMATED JACKPOT</h3>
             <div className="text-4xl md:text-5xl font-bold text-white mb-4">
               {hero.jackpot.amount}<br />USD
