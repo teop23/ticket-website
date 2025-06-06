@@ -1,5 +1,8 @@
 import React from 'react';
 import { hero } from '../config/content';
+import { getRecentWinners } from '../utils/winners';
+
+const winners = getRecentWinners();
 
 export const Hero: React.FC = () => {
   return (
@@ -64,22 +67,30 @@ export const Hero: React.FC = () => {
           <div className="glass-card rounded-2xl p-6 hover-scale">
             <h3 className="text-xl font-bold text-gray-900 mb-4">Last 3 Winners</h3>
             <div className="space-y-4">
-              {hero.recentWinners.map((winner, index) => (
+              {winners.map((winner, index) => (
                 <div key={index} className="flex justify-between items-start p-3 bg-white/50 rounded-lg">
                   <div>
-                    <div className="text-xs text-gray-500 mb-1">{winner.date}</div>
-                    <div className="text-sm font-medium text-gray-800">{winner.address}</div>
+                    <div className="text-xs text-gray-500 mb-1">
+                      {new Date(winner.date_added).toLocaleDateString()}
+                    </div>
+                    <div className="text-sm font-medium text-gray-800">
+                      {winner.data.split(',')[0].slice(0, 12)}...
+                    </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold text-red-600">{winner.amount}</div>
-                    <div className="text-sm text-gray-600">{winner.solAmount} SOL</div>
+                    <div className="text-lg font-bold text-red-600">
+                      ${(winner.distributed * 152.45).toFixed(2)}
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      {winner.distributed.toFixed(2)} SOL
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
             
             <div className="mt-4 text-center">
-              <a href="#winners" className="text-red-600 font-medium hover:opacity-80 transition-opacity">
+              <a href="/winners" className="text-red-600 font-medium hover:opacity-80 transition-opacity">
                 View All Winners →
               </a>
             </div>
