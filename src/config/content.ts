@@ -1,7 +1,7 @@
 // Hero Section
 export const hero = {
   title: "Power Millions",
-  description: "Power Millions combines the thrill of lottery with the power of Solana. Hold tickets, join hourly draws, and win automatically.",
+  description: "The first Solana token with automatic hourly lottery draws. Hold $TICKET tokens to enter - every 100 tokens gives you one ticket for all future drawings.",
   nextDrawing: {
     date: "Thu, Jun 5, 2025",
     time: {
@@ -47,7 +47,7 @@ export const navigation = {
 
 // Footer
 export const footer = {
-  description: "The first lottery token on Solana with hourly drawings and automatic payouts.",
+  description: "Power Millions: Fair launch with 100% of supply added to liquidity pool and LP tokens locked for 1 year.",
   quickLinks: [
     { label: 'Home', href: '#' },
     { label: 'How It Works', href: '#how-it-works' },
