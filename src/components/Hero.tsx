@@ -16,7 +16,7 @@ export const Hero: React.FC = () => {
           <img 
             src="/src/assets/ticket_logo_cropped_transparent.png"
             alt="Power Millions"
-            className="w-64 mx-auto mb-6 hover-scale"
+            className="w-48 mx-auto mb-4 hover-scale"
           />
           <h1 className="text-4xl md:text-6xl font-extrabold gradient-text mb-6">
             Win Big Every Hour

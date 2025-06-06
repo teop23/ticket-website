@@ -38,9 +38,6 @@ export const Navbar: React.FC = () => {
                 {item.label}
               </a>
             ))}
-            <button className="btn-primary">
-              Connect Wallet
-            </button>
           </div>
           
           {/* Mobile Menu Button */}
@@ -68,9 +65,6 @@ export const Navbar: React.FC = () => {
                   {item.label}
                 </a>
               ))}
-              <button className="btn-primary w-full">
-                Connect Wallet
-              </button>
             </div>
           </div>
         )}
