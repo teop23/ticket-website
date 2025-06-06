@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 
 interface Winner {
@@ -12,28 +12,40 @@ interface WinnersTableProps {
 }
 
 export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const winnersPerPage = 10;
+  const totalPages = Math.ceil(winners.length / winnersPerPage);
+  
+  const indexOfLastWinner = currentPage * winnersPerPage;
+  const indexOfFirstWinner = indexOfLastWinner - winnersPerPage;
+  const currentWinners = winners.slice(indexOfFirstWinner, indexOfLastWinner);
+
+  const goToPage = (page: number) => {
+    setCurrentPage(Math.min(Math.max(1, page), totalPages));
+  };
+
   return (
     <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Recent Winners</h2>
           <div className="text-gray-600">
-            Showing 10 of {winners.length} distributions
+            Showing {Math.min(winnersPerPage, winners.length - indexOfFirstWinner)} of {winners.length} distributions
           </div>
         </div>
-        <div className="bg-gray-900 rounded-xl overflow-hidden mb-4">
+        <div className="bg-gradient-to-br from-red-900 to-gray-900 rounded-xl overflow-hidden mb-4 shadow-xl">
           <table className="w-full">
             <thead>
-              <tr className="text-left border-b border-gray-800">
-                <th className="py-4 px-6 text-cyan-400 font-medium">Date</th>
-                <th className="py-4 px-6 text-cyan-400 font-medium">Winners</th>
-                <th className="py-4 px-6 text-cyan-400 font-medium text-right">Distributed</th>
-                <th className="py-4 px-6 text-cyan-400 font-medium text-right">Status</th>
+              <tr className="text-left border-b border-red-800/30">
+                <th className="py-4 px-6 text-red-300 font-medium">Date</th>
+                <th className="py-4 px-6 text-red-300 font-medium">Winners</th>
+                <th className="py-4 px-6 text-red-300 font-medium text-right">Distributed</th>
+                <th className="py-4 px-6 text-red-300 font-medium text-right">Status</th>
               </tr>
             </thead>
             <tbody>
-              {winners.slice(0, 10).map((winner, index) => (
-                <tr key={index} className="border-b border-gray-800 text-white">
+              {currentWinners.map((winner, index) => (
+                <tr key={index} className="border-b border-red-800/30 text-white hover:bg-red-900/20 transition-colors">
                   <td className="py-4 px-6">
                     {new Date(winner.date_added).toLocaleString()}
                   </td>
@@ -46,7 +58,7 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
                     {winner.distributed.toFixed(3)} SOL
                   </td>
                   <td className="py-4 px-6 text-right">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-cyan-400/10 text-cyan-400">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-500/20 text-red-300">
                       Complete
                     </span>
                   </td>
@@ -57,21 +69,53 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
         </div>
         <div className="flex justify-between items-center">
           <div className="flex gap-2">
-            <button className="px-4 py-2 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100">
+            <button 
+              onClick={() => goToPage(1)} 
+              disabled={currentPage === 1}
+              className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
+                currentPage === 1 
+                ? 'text-gray-400 bg-gray-100 border-gray-200 cursor-not-allowed' 
+                : 'text-white bg-red-600 border-red-700 hover:bg-red-700'
+              }`}
+            >
               First
             </button>
-            <button className="px-4 py-2 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100">
+            <button 
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
+                currentPage === 1 
+                ? 'text-gray-400 bg-gray-100 border-gray-200 cursor-not-allowed' 
+                : 'text-white bg-red-600 border-red-700 hover:bg-red-700'
+              }`}
+            >
               Previous
             </button>
           </div>
           <div className="text-sm text-gray-700">
-            Page 1 of 17
+            Page {currentPage} of {totalPages}
           </div>
           <div className="flex gap-2">
-            <button className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg border border-gray-700 hover:bg-gray-800">
+            <button 
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
+                currentPage === totalPages 
+                ? 'text-gray-400 bg-gray-100 border-gray-200 cursor-not-allowed' 
+                : 'text-white bg-red-600 border-red-700 hover:bg-red-700'
+              }`}
+            >
               Next
             </button>
-            <button className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg border border-gray-700 hover:bg-gray-800">
+            <button 
+              onClick={() => goToPage(totalPages)}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
+                currentPage === totalPages 
+                ? 'text-gray-400 bg-gray-100 border-gray-200 cursor-not-allowed' 
+                : 'text-white bg-red-600 border-red-700 hover:bg-red-700'
+              }`}
+            >
               Last
             </button>
           </div>
