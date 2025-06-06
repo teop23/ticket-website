@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck } from 'lucide-react';
 import { hero } from '../config/content';
+import ticketLogo from '../assets/ticket_logo_cropped_transparent.png';
 import { getRecentWinners } from '../utils/winners';
 
 const winners = getRecentWinners();
@@ -19,7 +20,7 @@ export const Hero: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
           <img 
-            src="/src/assets/ticket_logo_cropped_transparent.png"
+            src={ticketLogo}
             alt="Power Millions"
             className="w-64 mx-auto mb-4 hover-scale"
           />

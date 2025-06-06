@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { navigation } from '../config/content';
+import ticketBanner from '../assets/ticket_banner_cropped_transparent.png';
 import { scrollToSection } from '../utils/scroll';
 
 export const Navbar: React.FC = () => {
@@ -55,7 +56,7 @@ export const Navbar: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <a href="/" onClick={handleLogoClick}>
-            <img src="/src/assets/ticket_banner_cropped_transparent.png" alt="Power Millions" className="h-8 md:h-10" />
+            <img src={ticketBanner} alt="Power Millions" className="h-8 md:h-10" />
           </a>
           
           {/* Desktop Navigation */}
