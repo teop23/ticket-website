@@ -80,7 +80,7 @@ export const Hero: React.FC = () => {
                       </div>
                     </div>
                     <div className="text-sm font-medium text-gray-800">
-                      {winner.data.split(',')[0].slice(0, 12)}...
+                      {winner.data.split(',')[0]}
                     </div>
                   </div>
                   <div className="text-right">
