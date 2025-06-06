@@ -15,6 +15,7 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const winnersPerPage = 10;
   const totalPages = Math.ceil(winners.length / winnersPerPage);
+  import { ExternalLink } from 'lucide-react';
   
   const indexOfLastWinner = currentPage * winnersPerPage;
   const indexOfFirstWinner = indexOfLastWinner - winnersPerPage;
@@ -50,9 +51,17 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
                     {new Date(winner.date_added).toLocaleString()}
                   </td>
                   <td className="py-4 px-6">
-                    <div className="text-sm font-medium text-gray-900">
-                      {winner.data.split(',')[0]}
-                    </div>
+                    <a 
+                      href={`https://solscan.io/account/${winner.data.split(',')[0]}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3 py-1 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition-colors group"
+                    >
+                      <span className="text-sm font-medium">
+                        {winner.data.split(',')[0].slice(0, 12)}...
+                      </span>
+                      <ExternalLink size={14} className="opacity-50 group-hover:opacity-100 transition-opacity" />
+                    </a>
                   </td>
                   <td className="py-4 px-6 text-right font-medium text-gray-900">
                     {winner.distributed.toFixed(3)} SOL
