@@ -1,5 +1,4 @@
 import React from 'react';
-import { Twitter, Github, Send } from 'lucide-react';
 import { footer } from '../config/content';
 import ticketBanner from '../assets/ticket_banner_cropped_transparent.png';
 
@@ -13,17 +12,6 @@ export const Footer: React.FC = () => {
             <p className="text-gray-400 mb-4">
               {footer.description}
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Github size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Send size={20} />
-              </a>
-            </div>
           </div>
           
           <div>
@@ -50,24 +38,6 @@ export const Footer: React.FC = () => {
                 </li>
               ))}
             </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold mb-4">{footer.newsletter.title}</h3>
-            <p className="text-gray-400 mb-4">{footer.newsletter.description}</p>
-            <form className="flex">
-              <input 
-                type="email" 
-                placeholder="Your email" 
-                className="bg-gray-800 border border-gray-700 px-4 py-2 rounded-l-md focus:outline-none focus:border-red-500 w-full"
-              />
-              <button 
-                type="submit" 
-                className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-r-md transition-colors"
-              >
-                <Send size={18} />
-              </button>
-            </form>
           </div>
         </div>
         
