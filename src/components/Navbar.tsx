@@ -31,7 +31,7 @@ export const Navbar: React.FC = () => {
               <a 
                 key={item.label} 
                 href={item.href}
-                className="font-medium text-lg text-white hover:text-red-400 transition-all duration-300"
+                className="font-medium text-lg text-red-600 hover:text-red-800 transition-all duration-300"
               >
                 {item.label}
               </a>
@@ -55,7 +55,7 @@ export const Navbar: React.FC = () => {
                 <a 
                   key={item.label} 
                   href={item.href}
-                  className="font-medium text-lg text-white hover:text-red-400 transition-colors"
+                  className="font-medium text-lg text-red-600 hover:text-red-800 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
