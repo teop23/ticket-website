@@ -90,9 +90,9 @@ export const Hero: React.FC = () => {
             </div>
             
             <div className="mt-4 text-center">
-              <a href="/winners" className="text-red-600 font-medium hover:opacity-80 transition-opacity">
+              <Link to="/winners" className="text-red-600 font-medium hover:opacity-80 transition-opacity">
                 View All Winners →
-              </a>
+              </Link>
             </div>
           </div>
         </div>

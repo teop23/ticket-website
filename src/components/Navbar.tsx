@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { navigation } from '../config/content';
 
 export const Navbar: React.FC = () => {
@@ -28,13 +29,13 @@ export const Navbar: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-12">
             {navigation.items.map((item) => (
-              <a 
+              <Link
                 key={item.label} 
-                href={item.href}
+                to={item.href}
                 className="font-medium text-lg text-red-600 hover:text-red-800 transition-all duration-300"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
           
@@ -52,14 +53,14 @@ export const Navbar: React.FC = () => {
           <div className="md:hidden mt-4 py-4 border-t border-gray-200 animate-fadeIn">
             <div className="flex flex-col space-y-4">
               {navigation.items.map((item) => (
-                <a 
+                <Link
                   key={item.label} 
-                  href={item.href}
+                  to={item.href}
                   className="font-medium text-lg text-red-600 hover:text-red-800 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
