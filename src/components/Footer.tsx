@@ -6,15 +6,15 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-900 text-white pt-12 pb-6">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 md:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="text-center">
             <img src={ticketBanner} alt="Power Millions" className="h-10 md:h-12 mb-4" />
             <p className="text-gray-400 mb-4">
               {footer.description}
             </p>
           </div>
           
-          <div>
+          <div className="text-center">
             <h3 className="text-lg font-semibold mb-4">Recent Winners</h3>
             <ul className="space-y-2">
               {footer.recentWinners.map((link, index) => (
@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
           
-          <div>
+          <div className="text-center">
             <h3 className="text-lg font-semibold mb-4">Resources</h3>
             <ul className="space-y-2">
               {footer.resources.map((resource, index) => (

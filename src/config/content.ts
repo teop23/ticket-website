@@ -56,7 +56,7 @@ export const footer = {
     { label: 'FAQ', href: '#faq' },
     { label: 'Token Contract', href: '#' }
   ],
-  copyright: "© 2025 Power Millions. All rights reserved.",
+  copyright: "© 2025 Power Millions $TICKET",
   policies: [
     { label: 'Privacy Policy', href: '#' },
     { label: 'Terms of Service', href: '#' }
