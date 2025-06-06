@@ -43,7 +43,7 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
             </p>
           </div>
         ) : (
-        <div className="bg-white rounded-xl overflow-hidden mb-4 shadow-lg border border-gray-200">
+        <><div className="bg-white rounded-xl overflow-hidden mb-4 shadow-lg border border-gray-200">
           <table className="w-full">
             <thead>
               <tr className="text-left border-b border-gray-200 bg-gray-50">
@@ -137,7 +137,7 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
               Last
             </button>
           </div>
-        </div>
+        </div></>
         )}
       </div>
     </section>
