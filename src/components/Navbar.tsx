@@ -51,12 +51,12 @@ export const Navbar: React.FC = () => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-lg ${
-      isScrolled ? 'bg-white/80 py-1 shadow-lg' : 'bg-transparent py-2'
+      isScrolled ? 'bg-white/80 py-2 shadow-lg' : 'bg-transparent py-3'
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <a href="/" onClick={handleLogoClick}>
-            <img src={ticketBanner} alt="Power Millions" className="h-8 md:h-10" />
+            <img src={ticketBanner} alt="Power Millions" className="h-6 sm:h-8 md:h-10" />
           </a>
           
           {/* Desktop Navigation */}
@@ -75,16 +75,16 @@ export const Navbar: React.FC = () => {
           
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-white"
+            className="md:hidden text-red-600 hover:text-red-800 transition-colors p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <Menu />
+            <Menu className="w-6 h-6" />
           </button>
         </div>
         
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 py-4 border-t border-gray-200 animate-fadeIn">
+          <div className="md:hidden mt-2 py-4 px-4 bg-white/95 rounded-lg shadow-lg animate-fadeIn">
             <div className="flex flex-col space-y-4">
               {navigation.items.map((item) => (
                 <Link

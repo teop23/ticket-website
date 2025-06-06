@@ -9,7 +9,7 @@ const winners = getRecentWinners();
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative h-screen flex items-center pt-16 overflow-hidden">
+    <section className="relative min-h-screen flex items-center pt-16 pb-8 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gray-900 to-red-900 opacity-10" />
@@ -22,12 +22,12 @@ export const Hero: React.FC = () => {
           <img 
             src={ticketLogo}
             alt="Power Millions"
-            className="w-64 mx-auto mb-4 hover-scale"
+            className="w-32 sm:w-48 md:w-64 mx-auto mb-4 hover-scale"
           />
-          <h1 className="text-4xl md:text-6xl font-extrabold text-red-600 mb-6 leading-[1.2]">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-red-600 mb-6 leading-[1.2]">
             Win Big Every Hour
           </h1>
-          <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8">
+          <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8 px-4">
             {hero.description}
           </p>
           <button className="btn-primary">
@@ -37,29 +37,29 @@ export const Hero: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Next Drawing */}
-          <div className="glass-card rounded-2xl p-6 hover-scale flex flex-col justify-center min-h-[300px]">
+          <div className="glass-card rounded-2xl p-4 sm:p-6 hover-scale flex flex-col justify-center min-h-[250px] sm:min-h-[300px]">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 text-center">Next Drawing</h3>
             <p className="text-gray-600 mb-6 text-center text-lg">{hero.nextDrawing.date}</p>
             <div className="flex justify-center gap-3">
-              <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg px-4 py-3">
-                <span className="text-4xl font-bold text-white">{hero.nextDrawing.time.hours}</span>
+              <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg px-3 sm:px-4 py-2 sm:py-3">
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{hero.nextDrawing.time.hours}</span>
               </div>
-              <div className="text-gray-900 text-4xl font-bold self-center">:</div>
-              <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg px-4 py-3">
-                <span className="text-4xl font-bold text-white">{hero.nextDrawing.time.minutes}</span>
+              <div className="text-gray-900 text-2xl sm:text-3xl md:text-4xl font-bold self-center">:</div>
+              <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg px-3 sm:px-4 py-2 sm:py-3">
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{hero.nextDrawing.time.minutes}</span>
               </div>
-              <div className="text-gray-900 text-4xl font-bold self-center">:</div>
-              <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg px-4 py-3">
-                <span className="text-4xl font-bold text-white">{hero.nextDrawing.time.seconds}</span>
+              <div className="text-gray-900 text-2xl sm:text-3xl md:text-4xl font-bold self-center">:</div>
+              <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg px-3 sm:px-4 py-2 sm:py-3">
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{hero.nextDrawing.time.seconds}</span>
               </div>
             </div>
             <p className="text-center text-gray-500 text-base mt-8">Results announced shortly after drawing</p>
           </div>
           
           {/* Estimated Jackpot */}
-          <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300 flex flex-col justify-center min-h-[300px]">
+          <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl shadow-lg p-4 sm:p-6 text-center transform hover:scale-105 transition-transform duration-300 flex flex-col justify-center min-h-[250px] sm:min-h-[300px]">
             <h3 className="text-xl font-bold text-white mb-4">ESTIMATED JACKPOT</h3>
-            <div className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
               {hero.jackpot.amount}<br />USD
             </div>
             <div className="text-xl font-medium text-white/90 mb-2">CASH VALUE</div>
