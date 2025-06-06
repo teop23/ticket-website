@@ -28,37 +28,37 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
     <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Recent Winners</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-red-600">Recent Winners</h2>
           <div className="text-gray-600">
             Showing {Math.min(winnersPerPage, winners.length - indexOfFirstWinner)} of {winners.length} distributions
           </div>
         </div>
-        <div className="bg-gradient-to-br from-red-900 to-gray-900 rounded-xl overflow-hidden mb-4 shadow-xl">
+        <div className="bg-white rounded-xl overflow-hidden mb-4 shadow-lg border border-gray-200">
           <table className="w-full">
             <thead>
-              <tr className="text-left border-b border-red-800/30">
-                <th className="py-4 px-6 text-red-300 font-medium">Date</th>
-                <th className="py-4 px-6 text-red-300 font-medium">Winners</th>
-                <th className="py-4 px-6 text-red-300 font-medium text-right">Distributed</th>
-                <th className="py-4 px-6 text-red-300 font-medium text-right">Status</th>
+              <tr className="text-left border-b border-gray-200 bg-gray-50">
+                <th className="py-4 px-6 text-red-600 font-medium">Date</th>
+                <th className="py-4 px-6 text-red-600 font-medium">Winners</th>
+                <th className="py-4 px-6 text-red-600 font-medium text-right">Distributed</th>
+                <th className="py-4 px-6 text-red-600 font-medium text-right">Status</th>
               </tr>
             </thead>
             <tbody>
               {currentWinners.map((winner, index) => (
-                <tr key={index} className="border-b border-red-800/30 text-white hover:bg-red-900/20 transition-colors">
+                <tr key={index} className="border-b border-gray-100 text-gray-700 hover:bg-gray-50 transition-colors">
                   <td className="py-4 px-6">
                     {new Date(winner.date_added).toLocaleString()}
                   </td>
                   <td className="py-4 px-6">
-                    <div className="text-sm font-medium">
+                    <div className="text-sm font-medium text-gray-900">
                       {winner.data.split(',')[0]}
                     </div>
                   </td>
-                  <td className="py-4 px-6 text-right">
+                  <td className="py-4 px-6 text-right font-medium text-gray-900">
                     {winner.distributed.toFixed(3)} SOL
                   </td>
                   <td className="py-4 px-6 text-right">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-500/20 text-red-300">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-600">
                       Complete
                     </span>
                   </td>
