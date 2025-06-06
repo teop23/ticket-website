@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
+import { ExternalLink } from 'lucide-react';
 
 interface Winner {
   date_added: string;
@@ -15,8 +16,6 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const winnersPerPage = 10;
   const totalPages = Math.ceil(winners.length / winnersPerPage);
-  import { ExternalLink } from 'lucide-react';
-  
   const indexOfLastWinner = currentPage * winnersPerPage;
   const indexOfFirstWinner = indexOfLastWinner - winnersPerPage;
   const currentWinners = winners.slice(indexOfFirstWinner, indexOfLastWinner);
