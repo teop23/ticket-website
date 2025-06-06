@@ -39,7 +39,7 @@ export const hero = {
 // Navigation
 export const navigation = {
   items: [
-    { label: 'Winners', href: '#winners' },
+    { label: 'Winners', href: '/winners' },
     { label: 'How To Play', href: '#how-it-works' },
     { label: 'FAQ', href: '#faq' }
   ]

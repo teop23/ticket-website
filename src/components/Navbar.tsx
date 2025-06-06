@@ -24,7 +24,9 @@ export const Navbar: React.FC = () => {
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
-          <img src="/src/assets/ticket_banner_cropped_transparent.png" alt="Power Millions" className="h-8 md:h-10" />
+          <Link to="/">
+            <img src="/src/assets/ticket_banner_cropped_transparent.png" alt="Power Millions" className="h-8 md:h-10" />
+          </Link>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-12">
