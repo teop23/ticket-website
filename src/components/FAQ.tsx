@@ -29,10 +29,6 @@ const faqItems: FAQItem[] = [
   {
     question: "How often are the lottery drawings?",
     answer: "One winner is randomly selected every hour, 24 hours a day, 7 days a week. That's 24 chances to win every day!"
-  },
-  {
-    question: "Is Power Millions audited?",
-    answer: "Yes, Power Millions' smart contract has been audited to ensure the safety and fairness of the protocol. The project features a fair launch with 100% of supply added to liquidity and LP tokens locked for 1 year."
   }
 ];
 
