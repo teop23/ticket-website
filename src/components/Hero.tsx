@@ -79,7 +79,7 @@ export const Hero: React.FC = () => {
                         {new Date(winner.date_added).toLocaleDateString()}
                       </div>
                     </div>
-                    <div className="text-sm font-medium text-gray-800">
+                    <div className="text-sm font-medium text-gray-800 font-mono break-all pr-2">
                       {winner.data.split(',')[0]}
                     </div>
                   </div>

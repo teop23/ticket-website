@@ -64,7 +64,7 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
                       href={`https://solscan.io/account/${winner.data.split(',')[0]}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3 py-1 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition-colors group font-mono"
+                      className="inline-flex items-center gap-2 px-3 py-1 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition-colors group font-mono break-all max-w-[400px]"
                     >
                       <span className="text-sm">
                         {winner.data.split(',')[0]}
