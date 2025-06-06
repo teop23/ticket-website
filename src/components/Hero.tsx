@@ -9,7 +9,7 @@ const winners = getRecentWinners();
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-16 pb-8 overflow-hidden">
+    <section className="relative min-h-screen flex items-center pt-20 sm:pt-24 md:pt-16 pb-12 sm:pb-16 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gray-900 to-red-900 opacity-10" />
@@ -18,16 +18,16 @@ export const Hero: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 sm:mb-12">
           <img 
             src={ticketLogo}
             alt="Power Millions"
-            className="w-32 sm:w-48 md:w-64 mx-auto mb-4 hover-scale"
+            className="w-32 sm:w-40 md:w-48 mx-auto mb-6 sm:mb-8 hover-scale"
           />
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-red-600 mb-6 leading-[1.2]">
             Win Big Every Hour
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8 px-4">
+          <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8 px-2 sm:px-4">
             {hero.description}
           </p>
           <button className="btn-primary">
@@ -35,9 +35,9 @@ export const Hero: React.FC = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
           {/* Next Drawing */}
-          <div className="glass-card rounded-2xl p-4 sm:p-6 hover-scale flex flex-col justify-center min-h-[250px] sm:min-h-[300px]">
+          <div className="glass-card rounded-2xl p-4 sm:p-6 hover-scale flex flex-col justify-center min-h-[220px] sm:min-h-[280px] md:min-h-[300px]">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 text-center">Next Drawing</h3>
             <p className="text-gray-600 mb-6 text-center text-lg">{hero.nextDrawing.date}</p>
             <div className="flex justify-center gap-3">
@@ -57,7 +57,7 @@ export const Hero: React.FC = () => {
           </div>
           
           {/* Estimated Jackpot */}
-          <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl shadow-lg p-4 sm:p-6 text-center transform hover:scale-105 transition-transform duration-300 flex flex-col justify-center min-h-[250px] sm:min-h-[300px]">
+          <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl shadow-lg p-4 sm:p-6 text-center transform hover:scale-105 transition-transform duration-300 flex flex-col justify-center min-h-[220px] sm:min-h-[280px] md:min-h-[300px]">
             <h3 className="text-xl font-bold text-white mb-4">ESTIMATED JACKPOT</h3>
             <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
               {hero.jackpot.amount}<br />USD
@@ -67,9 +67,9 @@ export const Hero: React.FC = () => {
           </div>
           
           {/* Last 3 Winners */}
-          <div className="glass-card rounded-2xl p-3 hover-scale">
+          <div className="glass-card rounded-2xl p-3 hover-scale min-h-[220px] sm:min-h-[280px] md:min-h-[300px] flex flex-col">
             <h3 className="text-xl font-bold text-gray-900 mb-2">Last 3 Winners</h3>
-            <div className="space-y-4">
+            <div className="space-y-3 flex-grow">
               {winners.length > 0 ? winners.map((winner, index) => (
                 <div key={index} className="flex justify-between items-start p-2 bg-white/50 rounded-lg">
                   <div>
@@ -108,7 +108,7 @@ export const Hero: React.FC = () => {
               )}
             </div>
             
-            <div className="mt-2 text-center">
+            <div className="mt-auto pt-3 text-center">
               <Link to="/winners" className="text-red-600 font-medium hover:opacity-80 transition-opacity">
                 View All Winners →
               </Link>
