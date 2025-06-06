@@ -67,11 +67,11 @@ export const Hero: React.FC = () => {
           </div>
           
           {/* Last 3 Winners */}
-          <div className="glass-card rounded-2xl p-6 hover-scale">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Last 3 Winners</h3>
+          <div className="glass-card rounded-2xl p-3 hover-scale">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Last 3 Winners</h3>
             <div className="space-y-4">
               {winners.length > 0 ? winners.map((winner, index) => (
-                <div key={index} className="flex justify-between items-start p-3 bg-white/50 rounded-lg">
+                <div key={index} className="flex justify-between items-start p-2 bg-white/50 rounded-lg">
                   <div>
                     <div className="flex items-center gap-2">
                       <ShieldCheck size={16} className="text-red-600" />
@@ -108,7 +108,7 @@ export const Hero: React.FC = () => {
               )}
             </div>
             
-            <div className="mt-4 text-center">
+            <div className="mt-2 text-center">
               <Link to="/winners" className="text-red-600 font-medium hover:opacity-80 transition-opacity">
                 View All Winners →
               </Link>
