@@ -2,16 +2,39 @@ import React, { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { navigation } from '../config/content';
+import { scrollToSection } from '../utils/scroll';
 
 export const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
+  const [isNavigating, setIsNavigating] = useState(false);
   
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
     window.scrollTo(0, 0);
     navigate('/');
+  };
+  
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    
+    if (href.startsWith('#')) {
+      const isHome = window.location.pathname === '/';
+      if (!isHome) {
+        setIsNavigating(true);
+        navigate('/');
+        setTimeout(() => {
+          scrollToSection(href.slice(1));
+          setIsNavigating(false);
+        }, 100);
+      } else {
+        scrollToSection(href.slice(1));
+      }
+    } else {
+      navigate(href);
+    }
   };
 
   useEffect(() => {
@@ -42,6 +65,7 @@ export const Navbar: React.FC = () => {
                 key={item.label} 
                 to={item.href}
                 className="font-medium text-lg text-red-600 hover:text-red-800 transition-all duration-300"
+                onClick={(e) => handleNavClick(e, item.href)}
               >
                 {item.label}
               </Link>
@@ -66,7 +90,7 @@ export const Navbar: React.FC = () => {
                   key={item.label} 
                   to={item.href}
                   className="font-medium text-lg text-red-600 hover:text-red-800 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, item.href)}
                 >
                   {item.label}
                 </Link>
