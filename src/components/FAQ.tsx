@@ -8,11 +8,11 @@ type FAQItem = {
 const faqItems: FAQItem[] = [
   {
     question: "How does Power Millions work?",
-    answer: "Power Millions is a Solana token with an integrated lottery system. Each transaction (buy, sell, or transfer) of the $TICKET token has a small tax that contributes to the lottery pool. Every hour, a random holder is selected as the winner and receives the entire pot automatically."
+    answer: "Power Millions is a Solana token with an integrated lottery system. Every transaction has an 8% transfer fee that goes to the prize pool. Every hour, one random holder is selected as the winner and receives the prize automatically."
   },
   {
     question: "How are winners selected?",
-    answer: "Winners are selected using Solana's Verifiable Random Function (VRF) technology, which ensures a fair and transparent selection process. Every 10,000 $TICKET tokens you hold gives you one entry in the lottery, increasing your chances of winning."
+    answer: "One winner is randomly selected every hour. Every 100 $TICKET tokens you hold gives you one ticket for the raffle. Your tickets remain valid for all future drawings as long as you hold the tokens."
   },
   {
     question: "How do I claim my winnings?",
@@ -20,19 +20,19 @@ const faqItems: FAQItem[] = [
   },
   {
     question: "Where can I buy $TICKET tokens?",
-    answer: "You can buy $TICKET tokens on major Solana DEXs including Jupiter, Raydium, and Orca. Simply connect your Solana wallet, search for $TICKET, and make your purchase."
+    answer: "You can buy $TICKET tokens on major Solana DEXs. The token has been fair launched with 100% of the supply (1,000,000 tokens) added to the liquidity pool, and LP tokens are locked for 1 year."
   },
   {
     question: "Are there any transaction fees?",
-    answer: "Yes, there is a 4% buy tax, a 6% sell tax, and a 2% transfer tax. The majority of these taxes go directly to the lottery pool, with small portions allocated to development, liquidity, and marketing."
+    answer: "Yes, there is an 8% transfer fee on all transactions. This fee goes directly to the prize pool treasury, which is distributed to winners."
   },
   {
     question: "How often are the lottery drawings?",
-    answer: "Lottery drawings occur every hour, 24 hours a day, 7 days a week. That's 24 chances to win every day!"
+    answer: "One winner is randomly selected every hour, 24 hours a day, 7 days a week. That's 24 chances to win every day!"
   },
   {
     question: "Is Power Millions audited?",
-    answer: "Yes, Power Millions' smart contract has been audited by leading blockchain security firms to ensure the safety and fairness of the protocol. Audit reports are available on our documentation page."
+    answer: "Yes, Power Millions' smart contract has been audited to ensure the safety and fairness of the protocol. The project features a fair launch with 100% of supply added to liquidity and LP tokens locked for 1 year."
   }
 ];
 

@@ -9,18 +9,18 @@ type Step = {
 const steps: Step[] = [
   {
     number: "1",
-    title: "Hold $TICKET Tokens",
-    description: "Every 10,000 $TICKET tokens you hold = 1 raffle entry"
+    title: "Buy $TICKET",
+    description: "Every 100 $TICKET tokens you hold = 1 raffle entry"
   },
   {
     number: "2",
     title: "More Entries = Better Odds",
-    description: "50,000 tokens = 5 entries, 100,000 tokens = 10 entries"
+    description: "500 tokens = 5 entries, 1,000 tokens = 10 entries"
   },
   {
     number: "3",
     title: "Hourly Draws",
-    description: "VRF selects a random ticket every hour, winner gets paid automatically"
+    description: "One winner selected every hour, prize paid automatically from 8% transfer fee pool"
   }
 ];
 
@@ -78,12 +78,12 @@ export const HowItWorks: React.FC = () => {
             <div className="flex items-start space-x-4">
               <div className="bg-red-600 p-2 rounded-full text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <div>
-                <h4 className="text-lg font-semibold text-gray-800 mb-1">Auto-Growing Pot</h4>
-                <p className="text-gray-600">Every transaction adds to the pot size through a small tax</p>
+                <h4 className="text-lg font-semibold text-gray-800 mb-1">Prize Pool</h4>
+                <p className="text-gray-600">8% transfer fee goes directly to the prize pool</p>
               </div>
             </div>
             <div className="flex items-start space-x-4">
