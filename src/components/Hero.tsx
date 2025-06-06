@@ -87,7 +87,7 @@ export const Hero: React.FC = () => {
                         className="text-red-600 px-3 py-1 inline-flex items-center gap-2 group"
                       >
                         {winner.data.split(',')[0]}
-                        <ExternalLink size={14} className="opacity-50 group-hover:opacity-100 transition-opacity bg-red-50 hover:bg-red-100 rounded-lg p-1" />
+                        <ExternalLink size={20} className="opacity-50 group-hover:opacity-100 transition-opacity bg-red-50 hover:bg-red-100 rounded-lg p-1.5" />
                       </a>
                     </div>
                   </div>
