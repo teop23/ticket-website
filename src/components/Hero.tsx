@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ShieldCheck } from 'lucide-react';
 import { hero } from '../config/content';
 import { getRecentWinners } from '../utils/winners';
 
@@ -71,8 +72,11 @@ export const Hero: React.FC = () => {
               {winners.map((winner, index) => (
                 <div key={index} className="flex justify-between items-start p-3 bg-white/50 rounded-lg">
                   <div>
-                    <div className="text-xs text-gray-500 mb-1">
-                      {new Date(winner.date_added).toLocaleDateString()}
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck size={16} className="text-red-600" />
+                      <div className="text-xs text-gray-500">
+                        {new Date(winner.date_added).toLocaleDateString()}
+                      </div>
                     </div>
                     <div className="text-sm font-medium text-gray-800">
                       {winner.data.split(',')[0].slice(0, 12)}...
