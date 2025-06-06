@@ -31,9 +31,9 @@ export const Navbar: React.FC = () => {
               <a 
                 key={item.label} 
                 href={item.href}
-                className={`font-medium transition-all duration-300 ${
-                  isScrolled ? 'text-gray-800 hover:text-red-600' : 'text-white hover:text-red-200'
-                }`}
+                className={`font-medium text-lg transition-all duration-300 ${
+                  isScrolled ? 'text-gray-800 hover:text-red-600' : 'text-gray-100 hover:text-white'
+                } text-shadow`}
               >
                 {item.label}
               </a>
@@ -57,9 +57,9 @@ export const Navbar: React.FC = () => {
                 <a 
                   key={item.label} 
                   href={item.href}
-                  className={`font-medium transition-colors ${
-                    isScrolled ? 'text-gray-800 hover:text-red-600' : 'text-white hover:text-red-200'
-                  }`}
+                  className={`font-medium text-lg transition-colors ${
+                    isScrolled ? 'text-gray-800 hover:text-red-600' : 'text-gray-100 hover:text-white'
+                  } text-shadow`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
