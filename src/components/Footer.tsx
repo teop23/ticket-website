@@ -1,6 +1,7 @@
 import React from 'react';
 import { Twitter, Github, Send } from 'lucide-react';
 import { footer } from '../config/content';
+import ticketBanner from '../assets/ticket_banner_cropped_transparent.png';
 
 export const Footer: React.FC = () => {
   return (
@@ -8,7 +9,7 @@ export const Footer: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-1">
-            <img src="/src/assets/ticket_banner_cropped_transparent.png" alt="Power Millions" className="h-10 md:h-12 mb-4" />
+            <img src={ticketBanner} alt="Power Millions" className="h-10 md:h-12 mb-4" />
             <p className="text-gray-400 mb-4">
               {footer.description}
             </p>
