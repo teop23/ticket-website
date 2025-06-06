@@ -48,23 +48,14 @@ export const navigation = {
 // Footer
 export const footer = {
   description: "Power Millions: Fair launch with 100% of supply added to liquidity pool and LP tokens locked for 1 year.",
-  quickLinks: [
-    { label: 'Home', href: '#' },
-    { label: 'How It Works', href: '#how-it-works' },
-    { label: 'Buy $TICKET', href: '#buy' },
-    { label: 'Winners', href: '#winners' },
-    { label: 'FAQ', href: '#faq' }
+  recentWinners: [
+    { label: 'View All Winners', href: '/winners' }
   ],
   resources: [
-    { label: 'Documentation', href: '#' },
-    { label: 'Whitepaper', href: '#' },
-    { label: 'Audit Reports', href: '#' },
+    { label: 'How to Play', href: '#how-it-works' },
+    { label: 'FAQ', href: '#faq' },
     { label: 'Token Contract', href: '#' }
   ],
-  newsletter: {
-    title: "Stay Updated",
-    description: "Subscribe to our newsletter for the latest updates."
-  },
   copyright: "© 2025 Power Millions. All rights reserved.",
   policies: [
     { label: 'Privacy Policy', href: '#' },

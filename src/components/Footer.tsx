@@ -15,9 +15,9 @@ export const Footer: React.FC = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4">Recent Winners</h3>
             <ul className="space-y-2">
-              {footer.quickLinks.map((link, index) => (
+              {footer.recentWinners.map((link, index) => (
                 <li key={index}>
                   <a href={link.href} className="text-gray-400 hover:text-white transition-colors">
                     {link.label}
@@ -40,7 +40,6 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
         </div>
-        
         <div className="border-t border-gray-800 mt-8 pt-6 text-center text-sm text-gray-500">
           <p>{footer.copyright}</p>
           <p className="mt-2">
