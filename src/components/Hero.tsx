@@ -71,34 +71,36 @@ export const Hero: React.FC = () => {
             <h3 className="text-xl font-bold text-gray-900 mb-4">Last 3 Winners</h3>
             <div className="space-y-4">
               {winners.length > 0 ? winners.map((winner, index) => (
-                <div key={index} className="flex justify-between items-start p-3 bg-white/50 rounded-lg">
+                <div key={index} className="flex flex-col p-3 bg-white/50 rounded-lg space-y-2">
                   <div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 mb-1">
                       <ShieldCheck size={16} className="text-red-600" />
                       <div className="text-xs text-gray-500 whitespace-nowrap">
                         {new Date(winner.date_added).toLocaleString()}
                       </div>
+                    </div>
+                    <div className="flex items-start gap-2">
                       <a 
                         href={`https://solscan.io/account/${winner.data.split(',')[0]}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 group"
+                        className="inline-flex items-start gap-2 group"
                       >
                         <span className="bg-red-50 hover:bg-red-100 text-red-600 px-2 py-1 rounded-lg transition-colors">
                           <ExternalLink size={14} className="opacity-50 group-hover:opacity-100 transition-opacity" />
                         </span>
-                        <span className="text-sm font-medium font-mono break-all text-gray-800">
+                        <span className="text-sm font-medium font-mono break-all text-gray-800 leading-tight">
                           {winner.data.split(',')[0]}
                         </span>
                       </a>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="text-lg font-bold text-red-600">
-                      ${(winner.distributed * 152.45).toFixed(2)}
-                    </div>
+                  <div className="flex justify-between items-center mt-1">
                     <div className="text-sm text-gray-600">
                       {winner.distributed.toFixed(2)} SOL
+                    </div>
+                    <div className="text-lg font-bold text-red-600">
+                      ${(winner.distributed * 152.45).toFixed(2)}
                     </div>
                   </div>
                 </div>
