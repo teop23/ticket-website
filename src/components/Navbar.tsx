@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { navigation } from '../config/content';
 
 export const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
+  
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.scrollTo(0, 0);
+    navigate('/');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,9 +31,9 @@ export const Navbar: React.FC = () => {
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
-          <Link to="/">
+          <a href="/" onClick={handleLogoClick}>
             <img src="/src/assets/ticket_banner_cropped_transparent.png" alt="Power Millions" className="h-8 md:h-10" />
-          </Link>
+          </a>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-12">
