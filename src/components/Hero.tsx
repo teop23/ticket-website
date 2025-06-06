@@ -78,18 +78,16 @@ export const Hero: React.FC = () => {
                       <div className="text-xs text-gray-500 whitespace-nowrap">
                         {new Date(winner.date_added).toLocaleString()}
                       </div>
+                    </div>
+                    <div className="text-sm font-medium font-mono break-all pr-2 flex items-center gap-2">
                       <a 
                         href={`https://solscan.io/account/${winner.data.split(',')[0]}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 group"
+                        className="bg-red-50 hover:bg-red-100 text-red-600 px-3 py-1 rounded-lg transition-colors inline-flex items-center gap-2 group"
                       >
-                        <span className="bg-red-50 hover:bg-red-100 text-red-600 px-2 py-1 rounded-lg transition-colors">
-                          <ExternalLink size={14} className="opacity-50 group-hover:opacity-100 transition-opacity" />
-                        </span>
-                        <span className="text-sm font-medium font-mono break-all text-gray-800">
-                          {winner.data.split(',')[0]}
-                        </span>
+                        {winner.data.split(',')[0]}
+                        <ExternalLink size={14} className="opacity-50 group-hover:opacity-100 transition-opacity" />
                       </a>
                     </div>
                   </div>
