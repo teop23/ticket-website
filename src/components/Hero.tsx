@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, ExternalLink } from 'lucide-react';
 import { hero } from '../config/content';
 import ticketLogo from '../assets/ticket_logo_cropped_transparent.png';
 import { getRecentWinners } from '../utils/winners';
@@ -79,14 +79,15 @@ export const Hero: React.FC = () => {
                         {new Date(winner.date_added).toLocaleString()}
                       </div>
                     </div>
-                    <div className="text-sm font-medium font-mono break-all pr-2">
+                    <div className="text-sm font-medium font-mono break-all pr-2 flex items-center gap-2">
                       <a 
                         href={`https://solscan.io/account/${winner.data.split(',')[0]}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-red-600 hover:text-red-700 transition-colors"
+                        className="bg-red-50 hover:bg-red-100 text-red-600 px-3 py-1 rounded-lg transition-colors inline-flex items-center gap-2 group"
                       >
                         {winner.data.split(',')[0]}
+                        <ExternalLink size={14} className="opacity-50 group-hover:opacity-100 transition-opacity" />
                       </a>
                     </div>
                   </div>
