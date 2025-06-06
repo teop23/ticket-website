@@ -9,7 +9,7 @@ const winners = getRecentWinners();
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative h-screen flex items-center pt-16 overflow-hidden">
+    <section className="relative min-h-screen flex items-center py-8 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gray-900 to-red-900 opacity-10" />
@@ -18,11 +18,11 @@ export const Hero: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <img 
             src={ticketLogo}
             alt="Power Millions"
-            className="w-64 mx-auto mb-4 hover-scale"
+            className="w-48 mx-auto mb-4 hover-scale"
           />
           <h1 className="text-4xl md:text-6xl font-extrabold text-red-600 mb-6 leading-[1.2]">
             Win Big Every Hour
@@ -37,7 +37,7 @@ export const Hero: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Next Drawing */}
-          <div className="glass-card rounded-2xl p-6 hover-scale flex flex-col justify-center min-h-[300px]">
+          <div className="glass-card rounded-2xl p-4 hover-scale flex flex-col justify-center">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 text-center">Next Drawing</h3>
             <p className="text-gray-600 mb-6 text-center text-lg">{hero.nextDrawing.date}</p>
             <div className="flex justify-center gap-3">
@@ -57,7 +57,7 @@ export const Hero: React.FC = () => {
           </div>
           
           {/* Estimated Jackpot */}
-          <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300 flex flex-col justify-center min-h-[300px]">
+          <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl shadow-lg p-4 text-center transform hover:scale-105 transition-transform duration-300 flex flex-col justify-center">
             <h3 className="text-xl font-bold text-white mb-4">ESTIMATED JACKPOT</h3>
             <div className="text-4xl md:text-5xl font-bold text-white mb-4">
               {hero.jackpot.amount}<br />USD
