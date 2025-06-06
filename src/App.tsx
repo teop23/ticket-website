@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { HowItWorks } from './components/HowItWorks';
 import { FAQ } from './components/FAQ';
+import { HowToPlay } from './pages/HowToPlay';
 import { Footer } from './components/Footer';
 import { Winners } from './pages/Winners';
 import { Routes, Route } from 'react-router-dom';
@@ -20,6 +21,7 @@ function App() {
           </>
         } />
         <Route path="/winners" element={<Winners />} />
+        <Route path="/how-to-play" element={<HowToPlay />} />
       </Routes>
       <Footer />
     </div>

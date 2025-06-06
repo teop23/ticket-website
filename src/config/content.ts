@@ -40,7 +40,7 @@ export const hero = {
 export const navigation = {
   items: [
     { label: 'Winners', href: '/winners' },
-    { label: 'How To Play', href: '#how-it-works' },
+    { label: 'How To Play', href: '/how-to-play' },
     { label: 'FAQ', href: '#faq' }
   ]
 };
@@ -52,7 +52,7 @@ export const footer = {
     { label: 'View All Winners', href: '/winners' }
   ],
   resources: [
-    { label: 'How to Play', href: '#how-it-works' },
+    { label: 'How to Play', href: '/how-to-play' },
     { label: 'FAQ', href: '#faq' },
     { label: 'Token Contract', href: '#' }
   ],
