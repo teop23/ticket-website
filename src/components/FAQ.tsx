@@ -40,11 +40,11 @@ export const FAQ: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-16 md:py-24 bg-white">
+    <section id="faq" className="py-16 md:py-24 bg-white dark:bg-gray-900 transition-colors duration-300">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Frequently Asked Questions</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Got questions about Power Millions? We've got answers.
           </p>
         </div>
@@ -53,15 +53,15 @@ export const FAQ: React.FC = () => {
           {faqItems.map((item, index) => (
             <div 
               key={index} 
-              className="mb-4 border-b border-gray-200 pb-4"
+              className="mb-4 border-b border-gray-200 dark:border-gray-700 pb-4"
             >
               <button
-                className="flex justify-between items-center w-full text-left font-medium text-gray-900 focus:outline-none"
+                className="flex justify-between items-center w-full text-left font-medium text-gray-900 dark:text-gray-100 focus:outline-none"
                 onClick={() => toggleFAQ(index)}
               >
                 <span className="text-lg">{item.question}</span>
                 <svg
-                  className={`w-5 h-5 text-gray-500 transform ${openIndex === index ? 'rotate-180' : ''}`}
+                  className={`w-5 h-5 text-gray-500 dark:text-gray-400 transform ${openIndex === index ? 'rotate-180' : ''}`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -70,7 +70,7 @@ export const FAQ: React.FC = () => {
                 </svg>
               </button>
               {openIndex === index && (
-                <div className="mt-3 text-gray-600">
+                <div className="mt-3 text-gray-600 dark:text-gray-300">
                   {item.answer}
                 </div>
               )}
