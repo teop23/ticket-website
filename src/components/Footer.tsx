@@ -42,6 +42,9 @@ export const Footer: React.FC = () => {
         </div>
         <div className="border-t border-gray-800 mt-8 pt-6 text-center text-sm text-gray-500">
           <p>{footer.copyright}</p>
+          <p className="mt-2 text-xs text-gray-400">
+            Not affiliated with the official Mega Millions or Powerball lottery. This is an independent Solana blockchain project.
+          </p>
           <p className="mt-2">
             {footer.policies.map((policy, index) => (
               <React.Fragment key={index}>
