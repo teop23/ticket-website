@@ -8,11 +8,11 @@ import { useCountdown } from '../hooks/useCountdown';
 
 export const Hero: React.FC = () => {
   const [isCopied, setIsCopied] = React.useState(false);
-  
+
   // Use API hooks with auto-refresh every 10 seconds
   const { data: potData, loading: potLoading } = usePot(true, 10000);
   const { data: winners, loading: winnersLoading } = useRecentWinners(3, true, 10000);
-  
+
   // Use countdown timer based on last distribution
   const countdown = useCountdown(winners);
 
@@ -35,7 +35,7 @@ export const Hero: React.FC = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-4 sm:mb-6">
-          <img 
+          <img
             src={ticketLogo}
             alt="Power Millions"
             className="w-24 sm:w-32 md:w-40 mx-auto mb-3 sm:mb-4 hover-scale"
@@ -48,49 +48,45 @@ export const Hero: React.FC = () => {
           </p>
         </div>
 
-        {/* Contract Address Section - Only show if launched */}
-        {isLaunched && (
-          <div className="max-w-4xl mx-auto mb-6 sm:mb-8">
-            <div className="text-center mb-3">
-              <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-1">Official Contract Address</h3>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
-              <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 px-3 py-2">
-                <div className="font-mono text-base text-gray-900 dark:text-gray-100 break-all text-center">
-                  {hero.contractAddress}
-                </div>
+        <div className="max-w-4xl mx-auto mb-6 sm:mb-8">
+          <div className="text-center mb-3">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-1">Official Contract Address</h3>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 px-3 py-2">
+              <div className="font-mono text-base text-gray-900 dark:text-gray-100 break-all text-center">
+                {hero.contractAddress}
               </div>
-              
-              <div className="flex gap-2">
-                <button
-                  onClick={() => copyToClipboard(hero.contractAddress)}
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 text-xs font-medium transform ${
-                    isCopied 
-                      ? 'bg-green-600 scale-95' 
-                      : 'bg-red-600 hover:bg-red-700 hover:scale-105'
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                onClick={() => copyToClipboard(hero.contractAddress)}
+                className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 text-xs font-medium transform ${isCopied
+                    ? 'bg-green-600 scale-95'
+                    : 'bg-red-600 hover:bg-red-700 hover:scale-105'
                   } text-white active:scale-90`}
-                  title="Copy to clipboard"
-                >
-                  <Copy size={14} />
-                  {isCopied ? 'Copied!' : 'Copy'}
-                </button>
-              </div>
-            </div>
-            
-            <div className="text-center mb-3">
-              <button className="btn-primary text-base px-8 py-3">
-                Buy $TICKET Now
+                title="Copy to clipboard"
+              >
+                <Copy size={14} />
+                {isCopied ? 'Copied!' : 'Copy'}
               </button>
             </div>
-            
-            <div className="mt-2 text-center">
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                Always verify the contract address before making any transactions
-              </p>
-            </div>
           </div>
-        )}
+
+          <div className="text-center mb-3">
+            <button className="btn-primary text-base px-8 py-3">
+              Buy $TICKET Now
+            </button>
+          </div>
+
+          <div className="mt-2 text-center">
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              Always verify the contract address before making any transactions
+            </p>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
           {/* Next Drawing */}
@@ -101,11 +97,11 @@ export const Hero: React.FC = () => {
             {isLaunched ? (
               <>
                 <p className="text-gray-600 dark:text-gray-400 mb-4 text-center text-sm">
-                  {new Date().toLocaleDateString('en-US', { 
-                    weekday: 'short', 
-                    month: 'short', 
-                    day: 'numeric', 
-                    year: 'numeric' 
+                  {new Date().toLocaleDateString('en-US', {
+                    weekday: 'short',
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
                   })}
                 </p>
                 <div className="flex justify-center gap-2">
@@ -134,7 +130,7 @@ export const Hero: React.FC = () => {
               </div>
             )}
           </div>
-          
+
           {/* Estimated Jackpot */}
           <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl shadow-lg p-3 sm:p-4 text-center transform hover:scale-105 transition-transform duration-300 flex flex-col justify-center min-h-[180px] sm:min-h-[200px] md:min-h-[220px]">
             <h3 className="text-base font-bold text-white mb-2">
@@ -167,7 +163,7 @@ export const Hero: React.FC = () => {
               </div>
             )}
           </div>
-          
+
           {/* Last 3 Winners */}
           <div className="glass-card rounded-2xl p-3 hover-scale min-h-[180px] sm:min-h-[200px] md:min-h-[220px] flex flex-col">
             <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
@@ -195,7 +191,7 @@ export const Hero: React.FC = () => {
                       </div>
                     </div>
                     <div className="text-xs font-medium font-mono break-all pr-2">
-                      <a 
+                      <a
                         href={`https://solscan.io/account/${winner.data.split(',')[0]}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -222,7 +218,7 @@ export const Hero: React.FC = () => {
                 </div>
               )}
             </div>
-            
+
             <div className="mt-auto pt-2 text-center">
               {isLaunched && (
                 <Link to="/winners\" className="text-red-600 dark:text-red-400 font-medium hover:opacity-80 transition-opacity text-sm">
