@@ -41,12 +41,11 @@ export const Hero: React.FC = () => {
         <div className="max-w-4xl mx-auto mb-6 sm:mb-8">
           <div className="text-center mb-3">
             <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-1">Official Contract Address</h3>
-            <p className="text-xs text-gray-600 dark:text-gray-400">Verify you're interacting with the authentic $TICKET token</p>
           </div>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
             <div className="bg-white dark:bg-gray-800 rounded-xl px-3 py-2 border border-gray-200 dark:border-gray-700 flex-1 max-w-md">
-              <div className="font-mono text-xs text-gray-900 dark:text-gray-100 break-all text-center">
+              <div className="font-mono text-sm text-gray-900 dark:text-gray-100 break-all text-center">
                 {hero.contractAddress}
               </div>
             </div>
@@ -60,17 +59,6 @@ export const Hero: React.FC = () => {
                 <Copy size={14} />
                 Copy
               </button>
-              
-              <a
-                href={`https://solscan.io/token/${hero.contractAddress}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 bg-gray-600 hover:bg-gray-700 text-white px-3 py-2 rounded-lg transition-colors duration-200 text-xs font-medium"
-                title="View on Solscan"
-              >
-                <ExternalLink size={14} />
-                Verify
-              </a>
             </div>
           </div>
           
