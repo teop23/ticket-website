@@ -6,7 +6,6 @@ export default {
     extend: {
       colors: {
         'ticket-red': '#e63946',
-        'custom-red': '#771b1b',
         'ticket-black': '#1d3557',
         'ticket-white': '#f1faee',
       },
