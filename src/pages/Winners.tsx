@@ -36,7 +36,7 @@ export const Winners: React.FC = () => {
                 </h3>
                 <ul className="text-left text-gray-600 dark:text-gray-300 space-y-2">
                   <li>• Hourly lottery drawings, 24/7</li>
-                  <li>• Complete winner history with transaction links</li>
+                  <li>• Complete winner history with verifiable wallet links</li>
                   <li>• Real-time updates of new winners</li>
                   <li>• Transparent, verifiable results on-chain</li>
                 </ul>
