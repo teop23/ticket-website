@@ -84,17 +84,17 @@ export const Hero: React.FC = () => {
                         href={`https://solscan.io/account/${winner.data.split(',')[0]}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-red-600 hover:text-red-700 transition-colors"
+                        className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
                       >
                         {winner.data.split(',')[0]}
                       </a>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold text-red-600">
+                    <div className="text-lg font-bold text-green-500">
                       ${(winner.distributed * 152.45).toFixed(2)}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
                       {winner.distributed.toFixed(2)} SOL
                     </div>
                   </div>
