@@ -68,8 +68,8 @@ export const mockWinners: Winner[] = [
 ];
 
 export const mockPotData: PotData = {
-  amount: "$1,039.93",
-  solAmount: "6.82",
-  usdValue: 1039.93,
-  solValue: 6.82
+  amount: "$1,247.58",
+  solAmount: "8.19",
+  usdValue: 1247.58,
+  solValue: 8.19
 };

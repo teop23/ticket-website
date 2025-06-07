@@ -3,12 +3,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ticketLogo from '../assets/ticket_logo_cropped_transparent.png';
 import { hero } from '../config/content';
-import { getRecentWinners } from '../utils/winners';
-
-const winners = getRecentWinners();
+import { usePot, useRecentWinners } from '../hooks/useApi';
 
 export const Hero: React.FC = () => {
   const [isCopied, setIsCopied] = React.useState(false);
+  
+  // Use API hooks with auto-refresh every 10 seconds
+  const { data: potData, loading: potLoading } = usePot(true, 10000);
+  const { data: winners, loading: winnersLoading } = useRecentWinners(3, true, 10000);
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -106,18 +108,31 @@ export const Hero: React.FC = () => {
           {/* Estimated Jackpot */}
           <div className="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl shadow-lg p-3 sm:p-4 text-center transform hover:scale-105 transition-transform duration-300 flex flex-col justify-center min-h-[180px] sm:min-h-[200px] md:min-h-[220px]">
             <h3 className="text-base font-bold text-white mb-2">ESTIMATED JACKPOT</h3>
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
-              {hero.jackpot.amount}<br />USD
-            </div>
-            <div className="text-sm font-medium text-white/90 mb-1">CASH VALUE</div>
-            <div className="text-xl font-bold text-white">{hero.jackpot.solAmount} SOL</div>
+            {potLoading && !potData ? (
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
+                Loading...
+              </div>
+            ) : (
+              <>
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
+                  {potData?.amount || hero.jackpot.amount}<br />USD
+                </div>
+                <div className="text-sm font-medium text-white/90 mb-1">CASH VALUE</div>
+                <div className="text-xl font-bold text-white">{potData?.solAmount || hero.jackpot.solAmount} SOL</div>
+              </>
+            )}
           </div>
           
           {/* Last 3 Winners */}
           <div className="glass-card rounded-2xl p-3 hover-scale min-h-[180px] sm:min-h-[200px] md:min-h-[220px] flex flex-col">
             <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">Last 3 Winners</h3>
             <div className="space-y-2 flex-grow">
-              {winners.length > 0 ? winners.map((winner, index) => (
+              {winnersLoading && winners.length === 0 ? (
+                <div className="text-center py-4">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto mb-2"></div>
+                  <p className="text-gray-500 dark:text-gray-400">Loading winners...</p>
+                </div>
+              ) : winners.length > 0 ? winners.map((winner, index) => (
                 <div key={index} className="flex justify-between items-start p-2 bg-white/50 dark:bg-gray-700/50 rounded-lg">
                   <div>
                     <div className="flex items-center gap-2">

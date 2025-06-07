@@ -2,10 +2,10 @@ import React from 'react';
 import { useEffect } from 'react';
 import { WinnersTable } from '../components/WinnersTable';
 import { ShieldCheck } from 'lucide-react';
-import { getAllWinners } from '../utils/winners';
+import { useWinners } from '../hooks/useApi';
 
 export const Winners: React.FC = () => {
-  const winners = getAllWinners();
+  const { data: winners, loading } = useWinners(true, 10000); // Auto-refresh every 10 seconds
   const totalWinnings = winners.reduce((sum, winner) => sum + winner.distributed, 0);
   
   useEffect(() => {
@@ -18,14 +18,20 @@ export const Winners: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
             <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-300 mb-2">Total Draws</h3>
-            <p className="text-4xl font-bold text-gray-900 dark:text-gray-100">{winners.length}</p>
+            <p className="text-4xl font-bold text-gray-900 dark:text-gray-100">
+              {loading && winners.length === 0 ? '...' : winners.length}
+            </p>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">Hourly drawings</p>
           </div>
           
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
             <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-300 mb-2">Total Distributed</h3>
-            <p className="text-4xl font-bold text-gray-900 dark:text-gray-100">{totalWinnings.toFixed(2)} SOL</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">${(totalWinnings * 152.45).toFixed(2)} USD</p>
+            <p className="text-4xl font-bold text-gray-900 dark:text-gray-100">
+              {loading && winners.length === 0 ? '...' : `${totalWinnings.toFixed(2)} SOL`}
+            </p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+              {loading && winners.length === 0 ? '...' : `$${(totalWinnings * 152.45).toFixed(2)} USD`}
+            </p>
           </div>
           
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
@@ -38,7 +44,7 @@ export const Winners: React.FC = () => {
           </div>
         </div>
       </div>
-      <WinnersTable winners={winners} />
+      <WinnersTable winners={winners} loading={loading} />
     </div>
   );
 };

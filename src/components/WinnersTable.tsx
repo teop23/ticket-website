@@ -10,9 +10,10 @@ interface Winner {
 
 interface WinnersTableProps {
   winners: Winner[];
+  loading?: boolean;
 }
 
-export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
+export const WinnersTable: React.FC<WinnersTableProps> = ({ winners, loading = false }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const winnersPerPage = 10;
   const totalPages = Math.ceil(winners.length / winnersPerPage);
@@ -29,12 +30,23 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-red-600 dark:text-red-400">Recent Winners</h2>
-          {winners.length > 0 && <div className="text-gray-600 dark:text-gray-300 mt-2 md:mt-0">
-            Showing {Math.min(winnersPerPage, winners.length - indexOfFirstWinner)} of {winners.length} distributions
-          </div>}
+          {winners.length > 0 && (
+            <div className="text-gray-600 dark:text-gray-300 mt-2 md:mt-0">
+              Showing {Math.min(winnersPerPage, winners.length - indexOfFirstWinner)} of {winners.length} distributions
+              {loading && <span className="ml-2 text-sm">(updating...)</span>}
+            </div>
+          )}
         </div>
         
-        {winners.length === 0 ? (
+        {loading && winners.length === 0 ? (
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-12 text-center shadow-lg border border-gray-200 dark:border-gray-700">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Loading Winners</h3>
+            <p className="text-gray-600 dark:text-gray-300 max-w-md mx-auto">
+              Fetching the latest winner data...
+            </p>
+          </div>
+        ) : winners.length === 0 ? (
           <div className="bg-white dark:bg-gray-800 rounded-xl p-12 text-center shadow-lg border border-gray-200 dark:border-gray-700">
             <ShieldCheck size={48} className="text-red-600/50 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">No Winners Yet</h3>
@@ -44,6 +56,14 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners }) => {
           </div>
         ) : (
         <><div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden mb-4 shadow-lg border border-gray-200 dark:border-gray-700">
+          {loading && (
+            <div className="bg-blue-50 dark:bg-blue-900/30 px-6 py-2 border-b border-blue-200 dark:border-blue-700">
+              <div className="flex items-center gap-2 text-blue-700 dark:text-blue-300 text-sm">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                Updating winner data...
+              </div>
+            </div>
+          )}
           <table className="w-full">
             <thead>
               <tr className="text-left border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
