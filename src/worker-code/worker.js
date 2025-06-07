@@ -29,13 +29,15 @@ export default {
                 return new Response("Failed to fetch distributions", { status: 500 });
             }
             const data = await response.json();
+            const origin = request.headers.get('Origin');
+            const allowedOrigin = origin === 'http://localhost:5173' || 
+                                origin === 'https://powermillions.org' ||
+                                (origin && origin.includes('webcontainer-api.io')) ? origin : 'https://powermillions.org';
             return new Response(JSON.stringify(data), {
                 status: 200,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': request.headers.get('Origin') === 'http://localhost:5173'
-                        ? 'http://localhost:5173'
-                        : 'https://powermillions.org',
+                    'Access-Control-Allow-Origin': allowedOrigin,
                     'Vary': 'Origin'
                 },
             });
@@ -83,13 +85,15 @@ export default {
                     potAmount: sol,
                 }
 
+                const origin = request.headers.get('Origin');
+                const allowedOrigin = origin === 'http://localhost:5173' || 
+                                    origin === 'https://powermillions.org' ||
+                                    (origin && origin.includes('webcontainer-api.io')) ? origin : 'https://powermillions.org';
                 return new Response(JSON.stringify(response_data), {
                     status: 200,
                     headers: {
                         'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': request.headers.get('Origin') === 'http://localhost:5173'
-                            ? 'http://localhost:5173'
-                            : 'https://powermillions.org',
+                        'Access-Control-Allow-Origin': allowedOrigin,
                         'Vary': 'Origin'
                     },
                 });
