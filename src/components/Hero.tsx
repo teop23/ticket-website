@@ -37,7 +37,7 @@ export const Hero: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
           {/* Next Drawing */}
-          <div className="glass-card dark:bg-black/80 dark:border-gray-700/20 rounded-2xl p-4 sm:p-6 hover-scale flex flex-col justify-center min-h-[220px] sm:min-h-[280px] md:min-h-[300px]">
+          <div className="glass-card dark:bg-black/40 dark:border-gray-700/20 rounded-2xl p-4 sm:p-6 hover-scale flex flex-col justify-center min-h-[220px] sm:min-h-[280px] md:min-h-[300px]">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 text-center">Next Drawing</h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6 text-center text-lg">{hero.nextDrawing.date}</p>
             <div className="flex justify-center gap-3">
@@ -67,11 +67,11 @@ export const Hero: React.FC = () => {
           </div>
           
           {/* Last 3 Winners */}
-          <div className="glass-card dark:bg-black/80 dark:border-gray-700/20 rounded-2xl p-3 hover-scale min-h-[220px] sm:min-h-[280px] md:min-h-[300px] flex flex-col">
+          <div className="glass-card dark:bg-black/40 dark:border-gray-700/20 rounded-2xl p-3 hover-scale min-h-[220px] sm:min-h-[280px] md:min-h-[300px] flex flex-col">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Last 3 Winners</h3>
             <div className="space-y-3 flex-grow">
               {winners.length > 0 ? winners.map((winner, index) => (
-                <div key={index} className="flex justify-between items-start p-2 bg-white/50 dark:bg-black/50 rounded-lg">
+                <div key={index} className="flex justify-between items-start p-2 bg-white/50 dark:bg-black/30 rounded-lg">
                   <div>
                     <div className="flex items-center gap-2">
                       <ShieldCheck size={16} className="text-red-600" />
