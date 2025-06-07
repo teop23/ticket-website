@@ -1,8 +1,8 @@
+import { Copy, ShieldCheck } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Copy, ExternalLink } from 'lucide-react';
-import { hero } from '../config/content';
 import ticketLogo from '../assets/ticket_logo_cropped_transparent.png';
+import { hero } from '../config/content';
 import { getRecentWinners } from '../utils/winners';
 
 const winners = getRecentWinners();
