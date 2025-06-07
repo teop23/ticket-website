@@ -26,7 +26,7 @@ const steps: Step[] = [
 
 export const HowItWorks: React.FC = () => {
   return (
-    <section id="how-it-works" className="py-16 md:py-24" style={{ backgroundColor: '#771b1b20' }}>
+    <section id="how-it-works" className="py-16 md:py-24" style={{ backgroundColor: 'rgba(119, 27, 27, 0.2)' }}>
 
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
