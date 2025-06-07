@@ -39,7 +39,7 @@ export const usePot = (autoRefresh: boolean = false, interval: number = 20000) =
 /**
  * Hook for fetching winners data
  */
-export const useWinners = (autoRefresh: boolean = false, interval: number = 10000) => {
+export const useWinners = (autoRefresh: boolean = false, interval: number = 1000 * 60) => {
   const [data, setData] = useState<Winner[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
