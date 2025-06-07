@@ -24,6 +24,12 @@ export const Hero: React.FC = () => {
 
   const isLaunched = hero.contractAddress !== "TO BE ANNOUNCED";
 
+  const handleBuyClick = () => {
+    if (isLaunched && hero.contractAddress && hero.contractAddress.trim() !== '') {
+      window.open(`https://jup.ag/swap/SOL-${hero.contractAddress}`, '_blank');
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 sm:pt-24 md:pt-16 pb-12 sm:pb-16 overflow-hidden bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       {/* Background Elements */}
@@ -76,7 +82,15 @@ export const Hero: React.FC = () => {
           </div>
 
           <div className="text-center mb-3">
-            <button className="btn-primary text-base px-8 py-3">
+            <button 
+              onClick={handleBuyClick}
+              disabled={!isLaunched}
+              className={`text-base px-8 py-3 font-semibold rounded-full transition-all duration-300 shadow-lg transform ${
+                isLaunched 
+                  ? 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white hover:shadow-xl hover:-translate-y-0.5 cursor-pointer' 
+                  : 'bg-gray-400 dark:bg-gray-600 text-gray-200 dark:text-gray-400 cursor-not-allowed'
+              }`}
+            >
               Buy $TICKET Now
             </button>
           </div>
