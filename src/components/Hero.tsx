@@ -27,7 +27,7 @@ export const Hero: React.FC = () => {
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-red-600 mb-6 leading-[1.2]">
             Win Big Every Hour
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-8 px-2 sm:px-4">
+          <p className="text-base sm:text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto mb-8 px-2 sm:px-4">
             {hero.description}
           </p>
           <button className="btn-primary">
@@ -37,23 +37,23 @@ export const Hero: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
           {/* Next Drawing */}
-          <div className="glass-card rounded-2xl p-4 sm:p-6 hover-scale flex flex-col justify-center min-h-[220px] sm:min-h-[280px] md:min-h-[300px]">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 text-center">Next Drawing</h3>
-            <p className="text-gray-600 mb-6 text-center text-lg">{hero.nextDrawing.date}</p>
+          <div className="glass-card dark:bg-gray-800/80 dark:border-gray-700/20 rounded-2xl p-4 sm:p-6 hover-scale flex flex-col justify-center min-h-[220px] sm:min-h-[280px] md:min-h-[300px]">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 text-center">Next Drawing</h3>
+            <p className="text-gray-600 dark:text-gray-300 mb-6 text-center text-lg">{hero.nextDrawing.date}</p>
             <div className="flex justify-center gap-3">
               <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg px-3 sm:px-4 py-2 sm:py-3">
                 <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{hero.nextDrawing.time.hours}</span>
               </div>
-              <div className="text-gray-900 text-2xl sm:text-3xl md:text-4xl font-bold self-center">:</div>
+              <div className="text-gray-900 dark:text-white text-2xl sm:text-3xl md:text-4xl font-bold self-center">:</div>
               <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg px-3 sm:px-4 py-2 sm:py-3">
                 <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{hero.nextDrawing.time.minutes}</span>
               </div>
-              <div className="text-gray-900 text-2xl sm:text-3xl md:text-4xl font-bold self-center">:</div>
+              <div className="text-gray-900 dark:text-white text-2xl sm:text-3xl md:text-4xl font-bold self-center">:</div>
               <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg px-3 sm:px-4 py-2 sm:py-3">
                 <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{hero.nextDrawing.time.seconds}</span>
               </div>
             </div>
-            <p className="text-center text-gray-500 text-base mt-8">Results announced shortly after drawing</p>
+            <p className="text-center text-gray-500 dark:text-gray-400 text-base mt-8">Results announced shortly after drawing</p>
           </div>
           
           {/* Estimated Jackpot */}
@@ -67,15 +67,15 @@ export const Hero: React.FC = () => {
           </div>
           
           {/* Last 3 Winners */}
-          <div className="glass-card rounded-2xl p-3 hover-scale min-h-[220px] sm:min-h-[280px] md:min-h-[300px] flex flex-col">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Last 3 Winners</h3>
+          <div className="glass-card dark:bg-gray-800/80 dark:border-gray-700/20 rounded-2xl p-3 hover-scale min-h-[220px] sm:min-h-[280px] md:min-h-[300px] flex flex-col">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Last 3 Winners</h3>
             <div className="space-y-3 flex-grow">
               {winners.length > 0 ? winners.map((winner, index) => (
-                <div key={index} className="flex justify-between items-start p-2 bg-white/50 rounded-lg">
+                <div key={index} className="flex justify-between items-start p-2 bg-white/50 dark:bg-gray-700/50 rounded-lg">
                   <div>
                     <div className="flex items-center gap-2">
                       <ShieldCheck size={16} className="text-red-600" />
-                      <div className="text-xs text-gray-500 whitespace-nowrap">
+                      <div className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
                         {new Date(winner.date_added).toLocaleString()}
                       </div>
                     </div>
@@ -84,7 +84,7 @@ export const Hero: React.FC = () => {
                         href={`https://solscan.io/account/${winner.data.split(',')[0]}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-red-600 hover:text-red-700 transition-colors"
+                        className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors"
                       >
                         {winner.data.split(',')[0]}
                       </a>
@@ -94,7 +94,7 @@ export const Hero: React.FC = () => {
                     <div className="text-lg font-bold text-red-600">
                       ${(winner.distributed * 152.45).toFixed(2)}
                     </div>
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-gray-600 dark:text-gray-400">
                       {winner.distributed.toFixed(2)} SOL
                     </div>
                   </div>
@@ -102,14 +102,14 @@ export const Hero: React.FC = () => {
               )) : (
                 <div className="text-center py-8">
                   <ShieldCheck size={32} className="text-red-600/50 mx-auto mb-3" />
-                  <p className="text-gray-500">No winners yet. Be the first!</p>
-                  <p className="text-sm text-gray-400 mt-1">Next draw coming soon</p>
+                  <p className="text-gray-500 dark:text-gray-400">No winners yet. Be the first!</p>
+                  <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">Next draw coming soon</p>
                 </div>
               )}
             </div>
             
             <div className="mt-auto pt-3 text-center">
-              <Link to="/winners" className="text-red-600 font-medium hover:opacity-80 transition-opacity">
+              <Link to="/winners" className="text-red-600 dark:text-red-400 font-medium hover:opacity-80 transition-opacity">
                 View All Winners →
               </Link>
             </div>
