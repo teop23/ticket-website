@@ -8,9 +8,12 @@ import { getRecentWinners } from '../utils/winners';
 const winners = getRecentWinners();
 
 export const Hero: React.FC = () => {
+  const [isCopied, setIsCopied] = React.useState(false);
+
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    // You could add a toast notification here
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 1000);
   };
 
   return (
@@ -53,11 +56,15 @@ export const Hero: React.FC = () => {
             <div className="flex gap-2">
               <button
                 onClick={() => copyToClipboard(hero.contractAddress)}
-                className="flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg transition-colors duration-200 text-xs font-medium"
+                className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 text-xs font-medium transform ${
+                  isCopied 
+                    ? 'bg-green-600 scale-95' 
+                    : 'bg-red-600 hover:bg-red-700 hover:scale-105'
+                } text-white active:scale-90`}
                 title="Copy to clipboard"
               >
                 <Copy size={14} />
-                Copy
+                {isCopied ? 'Copied!' : 'Copy'}
               </button>
             </div>
           </div>
