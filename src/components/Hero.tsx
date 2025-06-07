@@ -11,7 +11,7 @@ export const Hero: React.FC = () => {
 
   // Use API hooks with auto-refresh every 10 seconds
   const { data: potData, loading: potLoading } = usePot(true, 10000);
-  const { data: winners, loading: winnersLoading } = useRecentWinners(3, true, 10000);
+  const { data: winners, loading: winnersLoading } = useRecentWinners(3, true);
 
   // Use countdown timer based on last distribution
   const countdown = useCountdown(winners);

@@ -6,7 +6,7 @@ import { useWinners } from '../hooks/useApi';
 import { hero } from '../config/content';
 
 export const Winners: React.FC = () => {
-  const { data: winners, loading } = useWinners(true, 10000); // Auto-refresh every 10 seconds
+  const { data: winners, loading } = useWinners(true); // Auto-refresh synced with distributions
   const totalWinnings = winners.reduce((sum, winner) => sum + winner.distributed, 0);
   const isLaunched = hero.contractAddress !== "TO BE ANNOUNCED";
   
