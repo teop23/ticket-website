@@ -35,6 +35,10 @@ export const navigation = {
     { label: 'Winners', href: '/winners' },
     { label: 'How To Play', href: '/how-to-play' },
     { label: 'FAQ', href: '#faq' }
+  ],
+  socialLinks: [
+    { name: 'X', href: 'https://x.com/Power_Millions' },
+    { name: 'Telegram', href: 'https://t.me/Power_Millions' }
   ]
 };
 
