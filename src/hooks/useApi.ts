@@ -5,13 +5,13 @@ import { Winner, PotData } from '../api/types';
 /**
  * Hook for fetching pot data
  */
-export const usePot = () => {
+export const usePot = (autoRefresh: boolean = false, interval: number = 10000) => {
   const [data, setData] = useState<PotData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchPot = async () => {
-    setLoading(true);
+    if (!data) setLoading(true); // Only show loading on initial fetch
     setError(null);
     
     const response = await api.getPot();
@@ -28,7 +28,12 @@ export const usePot = () => {
 
   useEffect(() => {
     fetchPot();
-  }, []);
+    
+    if (autoRefresh) {
+      const intervalId = setInterval(fetchPot, interval);
+      return () => clearInterval(intervalId);
+    }
+  }, [autoRefresh, interval]);
 
   return { data, loading, error, refetch: fetchPot };
 };
@@ -36,13 +41,13 @@ export const usePot = () => {
 /**
  * Hook for fetching winners data
  */
-export const useWinners = () => {
+export const useWinners = (autoRefresh: boolean = false, interval: number = 10000) => {
   const [data, setData] = useState<Winner[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchWinners = async () => {
-    setLoading(true);
+    if (data.length === 0) setLoading(true); // Only show loading on initial fetch
     setError(null);
     
     const response = await api.getWinners();
@@ -59,7 +64,12 @@ export const useWinners = () => {
 
   useEffect(() => {
     fetchWinners();
-  }, []);
+    
+    if (autoRefresh) {
+      const intervalId = setInterval(fetchWinners, interval);
+      return () => clearInterval(intervalId);
+    }
+  }, [autoRefresh, interval]);
 
   return { data, loading, error, refetch: fetchWinners };
 };
@@ -67,13 +77,13 @@ export const useWinners = () => {
 /**
  * Hook for fetching recent winners
  */
-export const useRecentWinners = (count: number = 3) => {
+export const useRecentWinners = (count: number = 3, autoRefresh: boolean = false, interval: number = 10000) => {
   const [data, setData] = useState<Winner[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchRecentWinners = async () => {
-    setLoading(true);
+    if (data.length === 0) setLoading(true); // Only show loading on initial fetch
     setError(null);
     
     const response = await api.getRecentWinners(count);
@@ -90,7 +100,12 @@ export const useRecentWinners = (count: number = 3) => {
 
   useEffect(() => {
     fetchRecentWinners();
-  }, [count]);
+    
+    if (autoRefresh) {
+      const intervalId = setInterval(fetchRecentWinners, interval);
+      return () => clearInterval(intervalId);
+    }
+  }, [count, autoRefresh, interval]);
 
   return { data, loading, error, refetch: fetchRecentWinners };
 };
