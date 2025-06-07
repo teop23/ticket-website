@@ -2,6 +2,7 @@
 export const hero = {
   title: "Power Millions",
   description: "The first Solana token with automatic hourly lottery draws. Hold $TICKET tokens to enter - every 100 tokens gives you one ticket for all future drawings.",
+  contractAddress: "TicketKHJVqZ8BVqX8W3aqr8K9nGhqp7hU9nF2eR3mP1",
   nextDrawing: {
     date: "Thu, Jun 5, 2025",
     time: {

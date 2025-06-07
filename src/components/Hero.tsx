@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, Copy, ExternalLink } from 'lucide-react';
 import { hero } from '../config/content';
 import ticketLogo from '../assets/ticket_logo_cropped_transparent.png';
 import { getRecentWinners } from '../utils/winners';
@@ -8,6 +8,11 @@ import { getRecentWinners } from '../utils/winners';
 const winners = getRecentWinners();
 
 export const Hero: React.FC = () => {
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    // You could add a toast notification here
+  };
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 sm:pt-24 md:pt-16 pb-12 sm:pb-16 overflow-hidden bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       {/* Background Elements */}
@@ -33,6 +38,52 @@ export const Hero: React.FC = () => {
           <button className="btn-primary">
             Buy $TICKET Now
           </button>
+        </div>
+
+        {/* Contract Address Section */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <div className="bg-gradient-to-r from-red-600/10 to-red-800/10 dark:from-red-600/20 dark:to-red-800/20 border border-red-200 dark:border-red-800/30 rounded-2xl p-6 backdrop-blur-sm">
+            <div className="text-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Official Contract Address</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Verify you're interacting with the authentic $TICKET token</p>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="bg-white dark:bg-gray-800 rounded-xl px-4 py-3 border border-gray-200 dark:border-gray-700 flex-1 max-w-md">
+                <div className="font-mono text-sm text-gray-900 dark:text-gray-100 break-all text-center">
+                  {hero.contractAddress}
+                </div>
+              </div>
+              
+              <div className="flex gap-2">
+                <button
+                  onClick={() => copyToClipboard(hero.contractAddress)}
+                  className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 text-sm font-medium"
+                  title="Copy to clipboard"
+                >
+                  <Copy size={16} />
+                  Copy
+                </button>
+                
+                <a
+                  href={`https://solscan.io/token/${hero.contractAddress}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 text-sm font-medium"
+                  title="View on Solscan"
+                >
+                  <ExternalLink size={16} />
+                  Verify
+                </a>
+              </div>
+            </div>
+            
+            <div className="mt-4 text-center">
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Always verify the contract address before making any transactions
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
