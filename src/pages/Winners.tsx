@@ -15,9 +15,9 @@ export const Winners: React.FC = () => {
   }, []);
   
   return (
-    <div className="pt-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="pt-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen">
       {!isLaunched ? (
-        <div className="container mx-auto px-4 py-16">
+        <div className="container mx-auto px-4 py-16 flex items-center justify-center min-h-[calc(100vh-4rem)]">
           <div className="max-w-2xl mx-auto text-center">
             <div className="bg-white dark:bg-gray-800 rounded-xl p-12 shadow-lg border border-gray-200 dark:border-gray-700">
               <ShieldCheck size={64} className="text-red-600/50 mx-auto mb-6" />
