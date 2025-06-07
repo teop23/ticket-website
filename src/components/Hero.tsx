@@ -154,10 +154,10 @@ export const Hero: React.FC = () => {
                   </div>
                   <div className="text-right">
                     <div className="text-sm font-bold text-green-500">
-                      ${(winner.distributed * 152.45).toFixed(2)}
+                      ${(winner.distributed * 152.45).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </div>
                     <div className="text-xs text-gray-500 dark:text-gray-400">
-                      {winner.distributed.toFixed(2)} SOL
+                      {winner.distributed.toFixed(3)} SOL
                     </div>
                   </div>
                 </div>

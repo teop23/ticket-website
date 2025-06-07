@@ -1,8 +1,18 @@
 import { Winner, PotData, ApiResponse } from './types';
-import { mockWinners, mockPotData } from './mockData';
 
-// Simulate API delay
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const CONTRACT_ADDRESS = "EqUJWhw3WHCrEEfcPVDigSkGapNfYWY2cuzRo6437obu";
+const DEFAULT_PRICE = 0.000001; // Fallback price in USD
+
+export const getPrice = async (): Promise<number> => {
+  try {
+    const response = await fetch(`https://api.jup.ag/price/v2?ids=${CONTRACT_ADDRESS}`);
+    const data = await response.json();
+    return data.data[CONTRACT_ADDRESS]?.price ?? DEFAULT_PRICE;
+  } catch (error) {
+    console.log('Error fetching price:', error);
+    return DEFAULT_PRICE;
+  }
+};
 
 export const api = {
   /**
@@ -10,46 +20,73 @@ export const api = {
    */
   async getPot(): Promise<ApiResponse<PotData>> {
     try {
-      // Simulate network delay
-      await delay(300);
+      // Fetch pot amount from worker
+      const potResponse = await fetch('https://worker.powermillions.org/pot');
+      const potData = await potResponse.json();
       
-      // In a real implementation, this would make an HTTP request
-      // const response = await fetch('/api/pot');
-      // const data = await response.json();
+      if (!potResponse.ok || !potData.potAmount) {
+        throw new Error('Failed to fetch pot data');
+      }
+
+      // Fetch current token price
+      const tokenPrice = await getPrice();
+      
+      const solAmount = potData.potAmount;
+      const usdValue = solAmount * 152.45; // Using SOL price approximation for now
       
       return {
         success: true,
-        data: mockPotData
+        data: {
+          amount: `$${usdValue.toFixed(2)}`,
+          solAmount: solAmount.toFixed(2),
+          usdValue: usdValue,
+          solValue: solAmount
+        }
       };
     } catch (error) {
+      console.error('Error fetching pot:', error);
+      
+      // Fallback data
       return {
         success: false,
-        data: mockPotData, // fallback to mock data
+        data: {
+          amount: "$1,039.93",
+          solAmount: "6.82",
+          usdValue: 1039.93,
+          solValue: 6.82
+        },
         error: error instanceof Error ? error.message : 'Failed to fetch pot data'
       };
     }
   },
 
   /**
-   * Get all winners
+   * Get all winners/distributions
    */
   async getWinners(): Promise<ApiResponse<Winner[]>> {
     try {
-      // Simulate network delay
-      await delay(500);
+      const response = await fetch('https://worker.powermillions.org/distributions');
       
-      // In a real implementation, this would make an HTTP request
-      // const response = await fetch('/api/winners');
-      // const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      // The API returns an array of distributions directly
+      const winners: Winner[] = Array.isArray(data) ? data : [];
       
       return {
         success: true,
-        data: mockWinners
+        data: winners
       };
     } catch (error) {
+      console.error('Error fetching winners:', error);
+      
+      // Fallback to empty array
       return {
         success: false,
-        data: mockWinners, // fallback to mock data
+        data: [],
         error: error instanceof Error ? error.message : 'Failed to fetch winners data'
       };
     }
@@ -75,9 +112,11 @@ export const api = {
         data: recentWinners
       };
     } catch (error) {
+      console.error('Error fetching recent winners:', error);
+      
       return {
         success: false,
-        data: mockWinners.slice(0, count), // fallback to mock data
+        data: [],
         error: error instanceof Error ? error.message : 'Failed to fetch recent winners'
       };
     }

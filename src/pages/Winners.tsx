@@ -30,7 +30,7 @@ export const Winners: React.FC = () => {
               {loading && winners.length === 0 ? '...' : `${totalWinnings.toFixed(2)} SOL`}
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-              {loading && winners.length === 0 ? '...' : `$${(totalWinnings * 152.45).toFixed(2)} USD`}
+              {loading && winners.length === 0 ? '...' : `$${(totalWinnings * 152.45).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`}
             </p>
           </div>
           

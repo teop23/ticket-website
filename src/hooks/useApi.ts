@@ -11,16 +11,14 @@ export const usePot = (autoRefresh: boolean = false, interval: number = 10000) =
   const [error, setError] = useState<string | null>(null);
 
   const fetchPot = async () => {
-    if (!data) setLoading(true); // Only show loading on initial fetch
+    if (!data) setLoading(true);
     setError(null);
     
     const response = await api.getPot();
     
-    if (response.success) {
-      setData(response.data);
-    } else {
+    setData(response.data);
+    if (!response.success) {
       setError(response.error || 'Failed to fetch pot data');
-      setData(response.data); // Still set fallback data
     }
     
     setLoading(false);
@@ -47,16 +45,14 @@ export const useWinners = (autoRefresh: boolean = false, interval: number = 1000
   const [error, setError] = useState<string | null>(null);
 
   const fetchWinners = async () => {
-    if (data.length === 0) setLoading(true); // Only show loading on initial fetch
+    if (data.length === 0) setLoading(true);
     setError(null);
     
     const response = await api.getWinners();
     
-    if (response.success) {
-      setData(response.data);
-    } else {
+    setData(response.data);
+    if (!response.success) {
       setError(response.error || 'Failed to fetch winners data');
-      setData(response.data); // Still set fallback data
     }
     
     setLoading(false);
@@ -83,16 +79,14 @@ export const useRecentWinners = (count: number = 3, autoRefresh: boolean = false
   const [error, setError] = useState<string | null>(null);
 
   const fetchRecentWinners = async () => {
-    if (data.length === 0) setLoading(true); // Only show loading on initial fetch
+    if (data.length === 0) setLoading(true);
     setError(null);
     
     const response = await api.getRecentWinners(count);
     
-    if (response.success) {
-      setData(response.data);
-    } else {
+    setData(response.data);
+    if (!response.success) {
       setError(response.error || 'Failed to fetch recent winners');
-      setData(response.data); // Still set fallback data
     }
     
     setLoading(false);
