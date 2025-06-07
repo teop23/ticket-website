@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { api } from '../api';
-import { Winner, PotData } from '../api/types';
+import { PotData, Winner } from '../api/types';
 
 /**
  * Hook for fetching pot data
  */
-export const usePot = (autoRefresh: boolean = false, interval: number = 10000) => {
+export const usePot = (autoRefresh: boolean = false, interval: number = 20000) => {
   const [data, setData] = useState<PotData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

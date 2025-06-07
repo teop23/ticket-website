@@ -1,13 +1,13 @@
-import { Winner, PotData, ApiResponse } from './types';
+import { ApiResponse, PotData, Winner } from './types';
 
-const CONTRACT_ADDRESS = "EqUJWhw3WHCrEEfcPVDigSkGapNfYWY2cuzRo6437obu";
+const SOL_CONTRACT_ADDRESS = "So11111111111111111111111111111111111111112";
 const DEFAULT_PRICE = 0.000001; // Fallback price in USD
 
-export const getPrice = async (): Promise<number> => {
+export const getSOLPrice = async (): Promise<number> => {
   try {
-    const response = await fetch(`https://api.jup.ag/price/v2?ids=${CONTRACT_ADDRESS}`);
+    const response = await fetch(`https://api.jup.ag/price/v2?ids=${SOL_CONTRACT_ADDRESS}`);
     const data = await response.json();
-    return data.data[CONTRACT_ADDRESS]?.price ?? DEFAULT_PRICE;
+    return data.data[SOL_CONTRACT_ADDRESS]?.price ?? DEFAULT_PRICE;
   } catch (error) {
     console.log('Error fetching price:', error);
     return DEFAULT_PRICE;
@@ -29,10 +29,10 @@ export const api = {
       }
 
       // Fetch current token price
-      const tokenPrice = await getPrice();
+      const tokenPrice = await getSOLPrice();
       
       const solAmount = potData.potAmount;
-      const usdValue = solAmount * 152.45; // Using SOL price approximation for now
+      const usdValue = solAmount * tokenPrice;
       
       return {
         success: true,

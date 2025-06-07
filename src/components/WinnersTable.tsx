@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { formatDistanceToNow } from 'date-fns';
 import { ExternalLink, ShieldCheck } from 'lucide-react';
+import React, { useState } from 'react';
 
 interface Winner {
   date_added: string;
