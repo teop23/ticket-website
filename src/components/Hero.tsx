@@ -22,8 +22,13 @@ export const Hero: React.FC = () => {
     setTimeout(() => setIsCopied(false), 1000);
   };
 
-  const isLaunched = hero.contractAddress !== "TO BE ANNOUNCED";
+  const isLaunched = hero.contractAddress !== "TO BE ANNOUNCED" && hero.contractAddress !== "";
 
+  const handleBuyButtonClick = () => {
+    if (isLaunched) {
+      window.open(`https://jup.ag/swap/SOL-${hero.contractAddress}`, '_blank');
+    }
+  };
   return (
     <section className="relative min-h-screen flex items-center pt-20 sm:pt-24 md:pt-16 pb-12 sm:pb-16 overflow-hidden bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       {/* Background Elements */}
@@ -56,7 +61,7 @@ export const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
             <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 px-3 py-2">
               <div className="font-mono text-base text-gray-900 dark:text-gray-100 break-all text-center">
-                {hero.contractAddress}
+                {hero.contractAddress !== "" ? hero.contractAddress : "TO BE ANNOUNCED"}
               </div>
             </div>
 
@@ -64,8 +69,8 @@ export const Hero: React.FC = () => {
               <button
                 onClick={() => copyToClipboard(hero.contractAddress)}
                 className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-all duration-200 text-xs font-medium transform ${isCopied
-                    ? 'bg-green-600 scale-95'
-                    : 'bg-red-600 hover:bg-red-700 hover:scale-105'
+                  ? 'bg-green-600 scale-95'
+                  : 'bg-red-600 hover:bg-red-700 hover:scale-105'
                   } text-white active:scale-90`}
                 title="Copy to clipboard"
               >
@@ -76,7 +81,9 @@ export const Hero: React.FC = () => {
           </div>
 
           <div className="text-center mb-3">
-            <button className="btn-primary text-base px-8 py-3">
+            <button
+              onClick={handleBuyButtonClick}
+              className="btn-primary text-base px-8 py-3">
               Buy $TICKET Now
             </button>
           </div>

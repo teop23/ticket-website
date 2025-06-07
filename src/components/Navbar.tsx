@@ -24,7 +24,6 @@ export const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
-  const [isNavigating, setIsNavigating] = useState(false);
   
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -39,11 +38,9 @@ export const Navbar: React.FC = () => {
     if (href.startsWith('#')) {
       const isHome = window.location.pathname === '/';
       if (!isHome) {
-        setIsNavigating(true);
         navigate('/');
         setTimeout(() => {
           scrollToSection(href.slice(1));
-          setIsNavigating(false);
         }, 100);
       } else {
         scrollToSection(href.slice(1));
