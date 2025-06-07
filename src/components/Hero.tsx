@@ -35,9 +35,6 @@ export const Hero: React.FC = () => {
           <p className="text-base sm:text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto mb-8 px-2 sm:px-4">
             {hero.description}
           </p>
-          <button className="btn-primary">
-            Buy $TICKET Now
-          </button>
         </div>
 
         {/* Contract Address Section */}
@@ -48,7 +45,7 @@ export const Hero: React.FC = () => {
               <p className="text-sm text-gray-600 dark:text-gray-400">Verify you're interacting with the authentic $TICKET token</p>
             </div>
             
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
               <div className="bg-white dark:bg-gray-800 rounded-xl px-4 py-3 border border-gray-200 dark:border-gray-700 flex-1 max-w-md">
                 <div className="font-mono text-sm text-gray-900 dark:text-gray-100 break-all text-center">
                   {hero.contractAddress}
@@ -76,6 +73,12 @@ export const Hero: React.FC = () => {
                   Verify
                 </a>
               </div>
+            </div>
+            
+            <div className="text-center mb-4">
+              <button className="btn-primary text-lg px-10 py-4">
+                Buy $TICKET Now
+              </button>
             </div>
             
             <div className="mt-4 text-center">
