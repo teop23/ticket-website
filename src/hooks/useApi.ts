@@ -37,42 +37,12 @@ export const usePot = (autoRefresh: boolean = false, interval: number = 20000) =
 };
 
 /**
- * Calculate time until next hour mark based on last distribution
- */
-const calculateTimeToNextDistribution = (winners: Winner[]): number => {
-  if (winners.length === 0) {
-    // If no winners yet, assume next distribution is at the next hour mark
-    const now = new Date();
-    const nextHour = new Date(now);
-    nextHour.setHours(now.getHours() + 1, 0, 0, 0);
-    return nextHour.getTime() - now.getTime();
-  }
-
-  // Get the most recent distribution
-  const lastDistribution = winners[0];
-  const lastDistroTime = new Date(lastDistribution.date_added);
-  const now = new Date();
-
-  // Calculate next distribution time (1 hour after last distribution)
-  const nextDistroTime = new Date(lastDistroTime.getTime() + 60 * 60 * 1000);
-  
-  // If next distribution time has passed, it should be at the next hour mark
-  if (nextDistroTime.getTime() <= now.getTime()) {
-    const nextHour = new Date(now);
-    nextHour.setHours(now.getHours() + 1, 0, 0, 0);
-    return nextHour.getTime() - now.getTime();
-  }
-
-  return nextDistroTime.getTime() - now.getTime();
-};
-/**
  * Hook for fetching winners data
  */
-export const useWinners = (autoRefresh: boolean = false) => {
+export const useWinners = (autoRefresh: boolean = false, interval: number = 1000 * 60) => {
   const [data, setData] = useState<Winner[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   const fetchWinners = async () => {
     if (data.length === 0) setLoading(true);
@@ -86,18 +56,16 @@ export const useWinners = (autoRefresh: boolean = false) => {
     }
     
     setLoading(false);
-    return response.data;
   };
 
   useEffect(() => {
-    setupDistributionSync();
+    fetchWinners();
     
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-    };
-  }, [autoRefresh]);
+    if (autoRefresh) {
+      const intervalId = setInterval(fetchWinners, interval);
+      return () => clearInterval(intervalId);
+    }
+  }, [autoRefresh, interval]);
 
   return { data, loading, error, refetch: fetchWinners };
 };
@@ -105,11 +73,10 @@ export const useWinners = (autoRefresh: boolean = false) => {
 /**
  * Hook for fetching recent winners
  */
-export const useRecentWinners = (count: number = 3, autoRefresh: boolean = false) => {
+export const useRecentWinners = (count: number = 3, autoRefresh: boolean = false, interval: number = 10000) => {
   const [data, setData] = useState<Winner[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   const fetchRecentWinners = async () => {
     if (data.length === 0) setLoading(true);
@@ -123,44 +90,16 @@ export const useRecentWinners = (count: number = 3, autoRefresh: boolean = false
     }
     
     setLoading(false);
-    return response.data;
   };
 
-  const setupDistributionSync = async () => {
-    // Clear any existing interval
-    if (intervalId) {
-      clearInterval(intervalId);
-    }
-
-    // Fetch initial data
-    const winners = await fetchRecentWinners();
+  useEffect(() => {
+    fetchRecentWinners();
     
     if (autoRefresh) {
-      // Calculate time to next distribution
-      const timeToNext = calculateTimeToNextDistribution(winners);
-      
-      // Set up the synced interval
-      const syncedIntervalId = setTimeout(() => {
-        // Fetch immediately when the hour hits
-        fetchRecentWinners();
-        
-        // Then set up regular hourly intervals
-        const hourlyIntervalId = setInterval(fetchRecentWinners, 60 * 60 * 1000); // 1 hour
-        setIntervalId(hourlyIntervalId);
-      }, timeToNext);
-      
-      setIntervalId(syncedIntervalId);
+      const intervalId = setInterval(fetchRecentWinners, interval);
+      return () => clearInterval(intervalId);
     }
-  };
-  useEffect(() => {
-    setupDistributionSync();
-    
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-    };
-  }, [count, autoRefresh]);
+  }, [count, autoRefresh, interval]);
 
   return { data, loading, error, refetch: fetchRecentWinners };
 };

@@ -11,7 +11,7 @@ export const Hero: React.FC = () => {
 
   // Use API hooks with auto-refresh every 10 seconds
   const { data: potData, loading: potLoading } = usePot(true, 10000);
-  const { data: winners, loading: winnersLoading } = useRecentWinners(3, true);
+  const { data: winners, loading: winnersLoading } = useRecentWinners(3, true, 10000);
 
   // Use countdown timer based on last distribution
   const countdown = useCountdown(winners);
@@ -228,7 +228,7 @@ export const Hero: React.FC = () => {
 
             <div className="mt-auto pt-2 text-center">
               {isLaunched && (
-                <Link to="/winners\" className=\"text-red-600 dark:text-red-400 font-medium hover:opacity-80 transition-opacity text-sm">
+                <Link to="/winners\" className="text-red-600 dark:text-red-400 font-medium hover:opacity-80 transition-opacity text-sm">
                   View All Winners →
                 </Link>
               )}
