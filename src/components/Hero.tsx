@@ -9,12 +9,14 @@ import { useCountdown } from '../hooks/useCountdown';
 export const Hero: React.FC = () => {
   const [isCopied, setIsCopied] = React.useState(false);
 
-  // Use API hooks with auto-refresh every 10 seconds
+  // Use API hooks - pot updates every 10 seconds, winners only on countdown complete
   const { data: potData, loading: potLoading } = usePot(true, 10000);
-  const { data: winners, loading: winnersLoading } = useRecentWinners(3, true, 10000);
+  const { data: winners, loading: winnersLoading, refetch: refetchWinners } = useRecentWinners(3, false);
 
-  // Use countdown timer based on last distribution
-  const countdown = useCountdown(winners);
+  // Use countdown timer based on last distribution with callback to refresh winners
+  const countdown = useCountdown(winners, () => {
+    refetchWinners();
+  });
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);

@@ -5,13 +5,15 @@ interface CountdownTime {
   hours: string;
   minutes: string;
   seconds: string;
+  isComplete: boolean;
 }
 
-export const useCountdown = (winners: Winner[]) => {
+export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void) => {
   const [timeLeft, setTimeLeft] = useState<CountdownTime>({
     hours: "00",
     minutes: "00",
-    seconds: "00"
+    seconds: "00",
+    isComplete: false
   });
 
   useEffect(() => {
@@ -21,7 +23,8 @@ export const useCountdown = (winners: Winner[]) => {
         setTimeLeft({
           hours: "00",
           minutes: "59",
-          seconds: "59"
+          seconds: "59",
+          isComplete: false
         });
         return;
       }
@@ -54,13 +57,24 @@ export const useCountdown = (winners: Winner[]) => {
         }
       }
 
+      // Check if countdown has reached zero
+      const isComplete = minutesLeft === 0 && secondsLeft === 0;
+      
+      // If countdown just completed, trigger the callback after 15 seconds
+      if (isComplete && onCountdownComplete) {
+        setTimeout(() => {
+          onCountdownComplete();
+        }, 15000); // 15 seconds delay
+      }
+
       // Format the time
       const formatTime = (time: number) => time.toString().padStart(2, '0');
 
       setTimeLeft({
         hours: "00", // Always 00 since we're counting down within the hour
         minutes: formatTime(minutesLeft),
-        seconds: formatTime(secondsLeft)
+        seconds: formatTime(secondsLeft),
+        isComplete
       });
     };
 
@@ -71,7 +85,7 @@ export const useCountdown = (winners: Winner[]) => {
     const interval = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(interval);
-  }, [winners]);
+  }, [winners, onCountdownComplete]);
 
   return timeLeft;
 };
