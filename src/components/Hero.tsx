@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ticketLogo from '../assets/ticket_logo_cropped_transparent.png';
 import { hero } from '../config/content';
 import { usePot, useRecentWinners } from '../hooks/useApi';
+import { useCountdown } from '../hooks/useCountdown';
 
 export const Hero: React.FC = () => {
   const [isCopied, setIsCopied] = React.useState(false);
@@ -11,6 +12,9 @@ export const Hero: React.FC = () => {
   // Use API hooks with auto-refresh every 10 seconds
   const { data: potData, loading: potLoading } = usePot(true, 10000);
   const { data: winners, loading: winnersLoading } = useRecentWinners(3, true, 10000);
+  
+  // Use countdown timer based on last distribution
+  const countdown = useCountdown(winners);
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -88,18 +92,25 @@ export const Hero: React.FC = () => {
           {/* Next Drawing */}
           <div className="glass-card rounded-2xl p-3 sm:p-4 hover-scale flex flex-col justify-center min-h-[180px] sm:min-h-[200px] md:min-h-[220px]">
             <h3 className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-2 text-center">Next Drawing</h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4 text-center text-sm">{hero.nextDrawing.date}</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-4 text-center text-sm">
+              {new Date().toLocaleDateString('en-US', { 
+                weekday: 'short', 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric' 
+              })}
+            </p>
             <div className="flex justify-center gap-2">
               <div className="bg-gradient-to-b from-red-600 to-red-700 rounded-lg px-2 sm:px-3 py-1 sm:py-2 shadow-lg">
-                <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{hero.nextDrawing.time.hours}</span>
+                <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{countdown.hours}</span>
               </div>
               <div className="text-gray-900 dark:text-gray-100 text-xl sm:text-2xl md:text-3xl font-bold self-center">:</div>
               <div className="bg-gradient-to-b from-red-600 to-red-700 rounded-lg px-2 sm:px-3 py-1 sm:py-2 shadow-lg">
-                <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{hero.nextDrawing.time.minutes}</span>
+                <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{countdown.minutes}</span>
               </div>
               <div className="text-gray-900 dark:text-gray-100 text-xl sm:text-2xl md:text-3xl font-bold self-center">:</div>
               <div className="bg-gradient-to-b from-red-600 to-red-700 rounded-lg px-2 sm:px-3 py-1 sm:py-2 shadow-lg">
-                <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{hero.nextDrawing.time.seconds}</span>
+                <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{countdown.seconds}</span>
               </div>
             </div>
             <p className="text-center text-gray-500 dark:text-gray-400 text-xs mt-4">Results announced shortly after drawing</p>
