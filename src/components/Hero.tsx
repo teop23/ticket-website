@@ -91,7 +91,7 @@ export const Hero: React.FC = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold text-red-600">
+                    <div className="text-lg font-bold text-green-600 dark:text-green-400">
                       ${(winner.distributed * 152.45).toFixed(2)}
                     </div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
