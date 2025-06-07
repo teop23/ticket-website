@@ -44,7 +44,7 @@ export const Hero: React.FC = () => {
           </div>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
-            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 px-4 py-3">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 px-3 py-2">
               <div className="font-mono text-base text-gray-900 dark:text-gray-100 break-all text-center">
                 {hero.contractAddress}
               </div>
