@@ -51,7 +51,7 @@ export const footer = {
   resources: [
     { label: 'How to Play', href: '/how-to-play' },
     { label: 'FAQ', href: '#faq' },
-    { label: 'Token Contract', href: '#' }
+    { label: 'Token Contract', href: hero.contractAddress !== "TO BE ANNOUNCED" && hero.contractAddress !== "" ? `https://revshare.dev/token/${hero.contractAddress}` : '#' },
   ],
   copyright: "© 2025 Power Millions $TICKET",
   policies: [
