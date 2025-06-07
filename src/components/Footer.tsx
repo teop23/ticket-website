@@ -42,7 +42,7 @@ export const Footer: React.FC = () => {
         </div>
         <div className="border-t border-gray-800 dark:border-gray-700 mt-8 pt-6 text-center text-sm text-gray-500 dark:text-gray-400">
           <p>{footer.copyright}</p>
-          <p className="mt-2 text-xs text-gray-400 dark:text-gray-500">
+          <p className="mt-2 text-sm text-gray-400 dark:text-gray-500">
             Not affiliated with the official Mega Millions or Powerball lottery. This is an independent Solana blockchain project.
           </p>
           <p className="mt-2">
