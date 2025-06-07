@@ -84,7 +84,7 @@ export const Hero: React.FC = () => {
                         href={`https://solscan.io/account/${winner.data.split(',')[0]}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-yellow-600 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-300 transition-colors"
+                        className="text-cyan-500 dark:text-cyan-400 hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors"
                       >
                         {winner.data.split(',')[0]}
                       </a>
