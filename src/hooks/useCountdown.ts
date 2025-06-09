@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { Winner } from '../api/types';
 import { hero } from '../config/content';
 
@@ -57,9 +57,6 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
     isComplete: false,
     isProcessing: false
   });
-
-  // Memoize the callback to prevent infinite re-renders
-  const stableCallback = React.useCallback(onCountdownComplete || (() => {}), [onCountdownComplete]);
 
   useEffect(() => {
     const calculateTimeLeft = async () => {
@@ -141,9 +138,9 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
       const isComplete = minutesLeft === 0 && secondsLeft === 0;
       
       // If countdown just completed, trigger the callback after 15 seconds
-      if (isComplete && stableCallback) {
+      if (isComplete && onCountdownComplete) {
         setTimeout(() => {
-          stableCallback();
+          onCountdownComplete();
         }, 15000); // 15 seconds delay
       }
 
@@ -166,7 +163,7 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
     const interval = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(interval);
-  }, [winners, stableCallback]);
+  }, [winners, onCountdownComplete]);
 
   return timeLeft;
 };
