@@ -107,9 +107,9 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
       const currentTime = new Date();
 
       // Check if the last distribution should have triggered a new drawing by now
-      // If more than 65 minutes have passed since the last distribution, we're processing
       const timeSinceLastDistro = currentTime.getTime() - lastDistroTime.getTime();
-      const isProcessing = timeSinceLastDistro > (65 * 60 * 1000); // 65 minutes in milliseconds
+      // If more than 60 minutes have passed since the last distribution, we're processing
+      const isProcessing = timeSinceLastDistro > (60 * 60 * 1000); // 60 minutes in milliseconds
 
       // Extract minutes from both times
       const lastDistroMinutes = lastDistroTime.getMinutes();
