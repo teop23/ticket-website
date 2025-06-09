@@ -14,11 +14,9 @@ export const Hero: React.FC = () => {
   const { data: winners, loading: winnersLoading, refetch: refetchWinners } = useRecentWinners(3, false);
 
   // Use countdown timer based on last distribution with callback to refresh winners
-  const handleCountdownComplete = useCallback(() => {
+  const countdown = useCountdown(winners, () => {
     refetchWinners();
-  }, [refetchWinners]);
-
-  const countdown = useCountdown(winners, handleCountdownComplete);
+  });
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
