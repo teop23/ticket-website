@@ -75,7 +75,7 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
             minutes: "00",
             seconds: "00",
             isComplete: true,
-            isProcessing: false
+            isProcessing: true
           });
         } else {
           // Calculate hours, minutes, and seconds remaining
