@@ -60,6 +60,8 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
 
   const onCountdownCompleteRef = useRef(onCountdownComplete);
   const firstDrawingTimestampRef = useRef<number | null>(null);
+  const pollingIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const hasTriggeredCallbackRef = useRef(false);
 
   // Update the ref when the callback changes
   useEffect(() => {
@@ -75,6 +77,14 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
     }
   }, [winners.length]);
 
+  // Cleanup polling interval on unmount
+  useEffect(() => {
+    return () => {
+      if (pollingIntervalRef.current) {
+        clearInterval(pollingIntervalRef.current);
+      }
+    };
+  }, []);
   useEffect(() => {
     const calculateTimeLeft = () => {
       if (winners.length === 0) {
@@ -92,6 +102,7 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
             isComplete: false,
             isProcessing: false
           });
+          hasTriggeredCallbackRef.current = false;
           return;
         }
         
@@ -106,6 +117,22 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
             isComplete: true,
             isProcessing: true
           });
+          
+          // Start continuous polling if not already started
+          if (!hasTriggeredCallbackRef.current && onCountdownCompleteRef.current) {
+            hasTriggeredCallbackRef.current = true;
+            
+            // Clear any existing interval
+            if (pollingIntervalRef.current) {
+              clearInterval(pollingIntervalRef.current);
+            }
+            
+            // Start immediate callback and then every 15 seconds
+            onCountdownCompleteRef.current();
+            pollingIntervalRef.current = setInterval(() => {
+              onCountdownCompleteRef.current?.();
+            }, 15000);
+          }
         } else {
           // Calculate hours, minutes, and seconds remaining
           const hoursLeft = Math.floor(timeRemainingSeconds / 3600);
@@ -121,6 +148,13 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
             isComplete: false,
             isProcessing: false
           });
+          hasTriggeredCallbackRef.current = false;
+          
+          // Clear polling interval if countdown is not complete
+          if (pollingIntervalRef.current) {
+            clearInterval(pollingIntervalRef.current);
+            pollingIntervalRef.current = null;
+          }
         }
         return;
       }
@@ -147,11 +181,33 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
       // Check if countdown has reached zero
       const isComplete = minutesLeft === 0 && secondsLeft === 0;
       
-      // If countdown just completed, trigger the callback after 15 seconds
-      if (isComplete && onCountdownCompleteRef.current) {
+      // If countdown just completed, start continuous polling
+      if (isComplete && !hasTriggeredCallbackRef.current && onCountdownCompleteRef.current) {
+        hasTriggeredCallbackRef.current = true;
+        
+        // Clear any existing interval
+        if (pollingIntervalRef.current) {
+          clearInterval(pollingIntervalRef.current);
+        }
+        
+        // Start immediate callback and then every 15 seconds
         setTimeout(() => {
           onCountdownCompleteRef.current?.();
-        }, 15000); // 15 seconds delay
+          pollingIntervalRef.current = setInterval(() => {
+            onCountdownCompleteRef.current?.();
+          }, 15000);
+        }, 15000); // Initial 15 second delay, then continuous polling
+      }
+      
+      // Reset callback trigger when countdown is not complete
+      if (!isComplete && !isProcessing) {
+        hasTriggeredCallbackRef.current = false;
+        
+        // Clear polling interval if countdown is not complete and not processing
+        if (pollingIntervalRef.current) {
+          clearInterval(pollingIntervalRef.current);
+          pollingIntervalRef.current = null;
+        }
       }
 
       // Format the time
