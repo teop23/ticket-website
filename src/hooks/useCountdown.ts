@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Winner } from '../api/types';
 
+// Launch timestamp (Unix timestamp in seconds)
+const LAUNCH_TIMESTAMP = 1735689600; // Replace with actual launch timestamp
+
 interface CountdownTime {
   hours: string;
   minutes: string;
@@ -19,13 +22,36 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
   useEffect(() => {
     const calculateTimeLeft = () => {
       if (winners.length === 0) {
-        // If no winners yet, show a default countdown
-        setTimeLeft({
-          hours: "00",
-          minutes: "59",
-          seconds: "59",
-          isComplete: false
-        });
+        // If no winners yet, calculate time remaining to one hour after launch
+        const currentTime = new Date();
+        const currentTimestamp = Math.floor(currentTime.getTime() / 1000); // Convert to Unix timestamp in seconds
+        const firstDrawingTimestamp = LAUNCH_TIMESTAMP + 3600; // Launch + 1 hour (3600 seconds)
+        
+        const timeRemainingSeconds = firstDrawingTimestamp - currentTimestamp;
+        
+        if (timeRemainingSeconds <= 0) {
+          // First drawing time has passed, show zeros
+          setTimeLeft({
+            hours: "00",
+            minutes: "00",
+            seconds: "00",
+            isComplete: true
+          });
+        } else {
+          // Calculate hours, minutes, and seconds remaining
+          const hoursLeft = Math.floor(timeRemainingSeconds / 3600);
+          const minutesLeft = Math.floor((timeRemainingSeconds % 3600) / 60);
+          const secondsLeft = timeRemainingSeconds % 60;
+          
+          const formatTime = (time: number) => time.toString().padStart(2, '0');
+          
+          setTimeLeft({
+            hours: formatTime(hoursLeft),
+            minutes: formatTime(minutesLeft),
+            seconds: formatTime(secondsLeft),
+            isComplete: false
+          });
+        }
         return;
       }
 
