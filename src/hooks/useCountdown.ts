@@ -3,7 +3,7 @@ import { Winner } from '../api/types';
 import { hero } from '../config/content';
 
 // Launch timestamp (Unix timestamp in seconds)
-const LAUNCH_TIMESTAMP = 1749488400;
+const LAUNCH_TIMESTAMP = 1749488560;
 
 interface CountdownTime {
   hours: string;
