@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Winner } from '../api/types';
 
 // Launch timestamp (Unix timestamp in seconds)
-const LAUNCH_TIMESTAMP = 1735689600; // Replace with actual launch timestamp
+const LAUNCH_TIMESTAMP = 1749488400;
 
 interface CountdownTime {
   hours: string;
