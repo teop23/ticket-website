@@ -10,6 +10,7 @@ interface CountdownTime {
   minutes: string;
   seconds: string;
   isComplete: boolean;
+  isProcessing: boolean;
 }
 
 async function getPoolCreationTimestamp() {
@@ -53,7 +54,8 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
     hours: "00",
     minutes: "00",
     seconds: "00",
-    isComplete: false
+    isComplete: false,
+    isProcessing: false
   });
 
   useEffect(() => {
@@ -72,7 +74,8 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
             hours: "00",
             minutes: "00",
             seconds: "00",
-            isComplete: true
+            isComplete: true,
+            isProcessing: false
           });
         } else {
           // Calculate hours, minutes, and seconds remaining
@@ -86,7 +89,8 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
             hours: formatTime(hoursLeft),
             minutes: formatTime(minutesLeft),
             seconds: formatTime(secondsLeft),
-            isComplete: false
+            isComplete: false,
+            isProcessing: false
           });
         }
         return;
@@ -94,8 +98,18 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
 
       // Get the most recent distribution
       const lastDistribution = winners[0]; // Winners are already sorted by date_added desc
-      const lastDistroTime = new Date(lastDistribution.date_added);
+      
+      // Convert UTC-2 time to local time for comparison
+      const lastDistroTimeUTC = new Date(lastDistribution.date_added);
+      // Add 2 hours to convert from UTC-2 to UTC, then to local time
+      const lastDistroTime = new Date(lastDistroTimeUTC.getTime() + (2 * 60 * 60 * 1000));
+      
       const currentTime = new Date();
+
+      // Check if the last distribution should have triggered a new drawing by now
+      // If more than 65 minutes have passed since the last distribution, we're processing
+      const timeSinceLastDistro = currentTime.getTime() - lastDistroTime.getTime();
+      const isProcessing = timeSinceLastDistro > (65 * 60 * 1000); // 65 minutes in milliseconds
 
       // Extract minutes from both times
       const lastDistroMinutes = lastDistroTime.getMinutes();
@@ -137,7 +151,8 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
         hours: "00", // Always 00 since we're counting down within the hour
         minutes: formatTime(minutesLeft),
         seconds: formatTime(secondsLeft),
-        isComplete
+        isComplete,
+        isProcessing
       });
     };
 
