@@ -116,7 +116,7 @@ export const Hero: React.FC = () => {
                 {countdown.isProcessing ? (
                   <div className="text-center">
                     <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-600 mb-2">
-                      Processing...
+                      Processing
                     </div>
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto"></div>
                   </div>
@@ -163,7 +163,7 @@ export const Hero: React.FC = () => {
                 ) : countdown.isProcessing ? (
                   <div className="text-center">
                     <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
-                      Processing...
+                      Processing
                     </div>
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto"></div>
                   </div>
