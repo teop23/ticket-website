@@ -113,19 +113,28 @@ export const Hero: React.FC = () => {
                     year: 'numeric'
                   })}
                 </p>
-                <div className="flex justify-center gap-2">
-                  <div className="bg-gradient-to-b from-red-600 to-red-700 rounded-lg px-2 sm:px-3 py-1 sm:py-2 shadow-lg">
-                    <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{countdown.hours}</span>
+                {countdown.isProcessing ? (
+                  <div className="text-center">
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-600 mb-2">
+                      Processing...
+                    </div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto"></div>
                   </div>
-                  <div className="text-gray-900 dark:text-gray-100 text-xl sm:text-2xl md:text-3xl font-bold self-center">:</div>
-                  <div className="bg-gradient-to-b from-red-600 to-red-700 rounded-lg px-2 sm:px-3 py-1 sm:py-2 shadow-lg">
-                    <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{countdown.minutes}</span>
+                ) : (
+                  <div className="flex justify-center gap-2">
+                    <div className="bg-gradient-to-b from-red-600 to-red-700 rounded-lg px-2 sm:px-3 py-1 sm:py-2 shadow-lg">
+                      <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{countdown.hours}</span>
+                    </div>
+                    <div className="text-gray-900 dark:text-gray-100 text-xl sm:text-2xl md:text-3xl font-bold self-center">:</div>
+                    <div className="bg-gradient-to-b from-red-600 to-red-700 rounded-lg px-2 sm:px-3 py-1 sm:py-2 shadow-lg">
+                      <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{countdown.minutes}</span>
+                    </div>
+                    <div className="text-gray-900 dark:text-gray-100 text-xl sm:text-2xl md:text-3xl font-bold self-center">:</div>
+                    <div className="bg-gradient-to-b from-red-600 to-red-700 rounded-lg px-2 sm:px-3 py-1 sm:py-2 shadow-lg">
+                      <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{countdown.seconds}</span>
+                    </div>
                   </div>
-                  <div className="text-gray-900 dark:text-gray-100 text-xl sm:text-2xl md:text-3xl font-bold self-center">:</div>
-                  <div className="bg-gradient-to-b from-red-600 to-red-700 rounded-lg px-2 sm:px-3 py-1 sm:py-2 shadow-lg">
-                    <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{countdown.seconds}</span>
-                  </div>
-                </div>
+                )}
                 <p className="text-center text-gray-500 dark:text-gray-400 text-xs mt-4">Results announced shortly after drawing</p>
               </>
             ) : (
@@ -150,6 +159,13 @@ export const Hero: React.FC = () => {
                 {potLoading && !potData ? (
                   <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
                     Loading...
+                  </div>
+                ) : countdown.isProcessing ? (
+                  <div className="text-center">
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
+                      Processing...
+                    </div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto"></div>
                   </div>
                 ) : (
                   <>
