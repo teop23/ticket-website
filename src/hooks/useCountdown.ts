@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Winner } from '../api/types';
 import { hero } from '../config/content';
 
@@ -58,18 +58,47 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
     isProcessing: false
   });
 
+  const onCountdownCompleteRef = useRef(onCountdownComplete);
+  const firstDrawingTimestampRef = useRef<number | null>(null);
+
+  // Update the ref when the callback changes
   useEffect(() => {
-    const calculateTimeLeft = async () => {
+    onCountdownCompleteRef.current = onCountdownComplete;
+  }, [onCountdownComplete]);
+
+  // Get first drawing timestamp once
+  useEffect(() => {
+    if (winners.length === 0 && firstDrawingTimestampRef.current === null) {
+      getFirstDrawingTimestamp().then(timestamp => {
+        firstDrawingTimestampRef.current = timestamp;
+      });
+    }
+  }, [winners.length]);
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
       if (winners.length === 0) {
         // If no winners yet, calculate time remaining to one hour after launch
         const currentTime = new Date();
         const currentTimestamp = Math.floor(currentTime.getTime() / 1000); // Convert to Unix timestamp in seconds
         
-        const firstDrawingTimestamp = await getFirstDrawingTimestamp();
+        const firstDrawingTimestamp = firstDrawingTimestampRef.current;
+        if (!firstDrawingTimestamp) {
+          // Still loading first drawing timestamp
+          setTimeLeft({
+            hours: "00",
+            minutes: "00",
+            seconds: "00",
+            isComplete: false,
+            isProcessing: false
+          });
+          return;
+        }
+        
         const timeRemainingSeconds = firstDrawingTimestamp - currentTimestamp;
         
         if (timeRemainingSeconds <= 0) {
-          // First drawing time has passed, show zeros
+          // First drawing time has passed, show processing
           setTimeLeft({
             hours: "00",
             minutes: "00",
@@ -138,9 +167,9 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
       const isComplete = minutesLeft === 0 && secondsLeft === 0;
       
       // If countdown just completed, trigger the callback after 15 seconds
-      if (isComplete && onCountdownComplete) {
+      if (isComplete && onCountdownCompleteRef.current) {
         setTimeout(() => {
-          onCountdownComplete();
+          onCountdownCompleteRef.current?.();
         }, 15000); // 15 seconds delay
       }
 
@@ -163,7 +192,7 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
     const interval = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(interval);
-  }, [winners, onCountdownComplete]);
+  }, [winners]); // Only depend on winners array
 
   return timeLeft;
 };
