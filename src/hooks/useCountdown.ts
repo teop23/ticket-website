@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Winner } from '../api/types';
+import { hero } from '../config/content';
 
 // Launch timestamp (Unix timestamp in seconds)
 const LAUNCH_TIMESTAMP = 1749488400;
@@ -11,6 +12,42 @@ interface CountdownTime {
   isComplete: boolean;
 }
 
+async function getPoolCreationTimestamp() {
+  const ca = hero.contractAddress;
+  if (ca === "TO BE ANNOUNCED") {
+    return null; // Not launched yet
+  }
+  try {
+    const response = await fetch(`https://api.geckoterminal.com/api/v2/search/pools?query=${ca}&page=1`);
+    const data = await response.json();
+    //the pool creation time is at data.data[0].attributes.pool_created_at
+    //time format "2025-06-03T14:40:01Z"
+    if (data.data.length < 1) {
+      return null; // No pools found
+    }
+
+    const pool_created_at = data.data[0].attributes.pool_created_at;
+    if (!pool_created_at) {
+      return null; // No creation time available
+    }
+
+    //convert to Unix timestamp in seconds
+    const creationDate = new Date(pool_created_at);
+    return Math.floor(creationDate.getTime() / 1000); // Convert to seconds
+  } catch (error) {
+    console.error('Error fetching pool creation time:', error);
+  }
+}
+
+async function getFirstDrawingTimestamp() {
+  const poolCreationTime = await getPoolCreationTimestamp();
+  if (!poolCreationTime) {
+    return LAUNCH_TIMESTAMP + 3600; // Default to launch time + 1 hour if no pool found
+  }
+
+  return poolCreationTime + 3600; // First drawing is 1 hour after pool creation
+}
+
 export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void) => {
   const [timeLeft, setTimeLeft] = useState<CountdownTime>({
     hours: "00",
@@ -20,13 +57,13 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
   });
 
   useEffect(() => {
-    const calculateTimeLeft = () => {
+    const calculateTimeLeft = async () => {
       if (winners.length === 0) {
         // If no winners yet, calculate time remaining to one hour after launch
         const currentTime = new Date();
         const currentTimestamp = Math.floor(currentTime.getTime() / 1000); // Convert to Unix timestamp in seconds
-        const firstDrawingTimestamp = LAUNCH_TIMESTAMP + 3600; // Launch + 1 hour (3600 seconds)
         
+        const firstDrawingTimestamp = await getFirstDrawingTimestamp();
         const timeRemainingSeconds = firstDrawingTimestamp - currentTimestamp;
         
         if (timeRemainingSeconds <= 0) {
