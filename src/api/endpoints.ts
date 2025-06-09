@@ -38,7 +38,7 @@ export const api = {
         success: true,
         data: {
           amount: `$${usdValue.toFixed(2)}`,
-          solAmount: solAmount.toFixed(2),
+          solAmount: solAmount,
           usdValue: usdValue,
           solValue: solAmount
         }
