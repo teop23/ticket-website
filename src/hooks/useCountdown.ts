@@ -139,29 +139,21 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
       const timeSinceLastDistro = currentTime.getTime() - lastDistroTime.getTime();
       // If more than 60 minutes have passed since the last distribution, we're processing
       const isProcessing = timeSinceLastDistro > (60 * 60 * 1000); // 60 minutes in milliseconds
-
-      // Extract minutes from both times
-      const lastDistroMinutes = lastDistroTime.getMinutes();
-      const currentMinutes = currentTime.getMinutes();
-      const currentSeconds = currentTime.getSeconds();
-
-      // Calculate minutes remaining until next hour mark
-      let minutesLeft = lastDistroMinutes - currentMinutes;
-      if (minutesLeft <= 0) {
-        minutesLeft = 60 + minutesLeft; // Add 60 to handle negative values
+      if(isProcessing) {
+        setTimeLeft({
+          hours: "00",
+          minutes: "00",
+          seconds: "00",
+          isComplete: true,
+          isProcessing: true
+        });
+        return;
       }
 
-      // Calculate seconds remaining
-      let secondsLeft = 60 - currentSeconds;
-      if (secondsLeft === 60) {
-        secondsLeft = 0;
-      } else {
-        // If we have seconds left, we need to subtract 1 from minutes
-        minutesLeft = minutesLeft - 1;
-        if (minutesLeft < 0) {
-          minutesLeft = 59;
-        }
-      }
+      const timeUntilNextDrawing = new Date(3600 * 1000 - timeSinceLastDistro);
+
+      const minutesLeft = timeUntilNextDrawing.getMinutes();
+      const secondsLeft = timeUntilNextDrawing.getSeconds();
 
       // Check if countdown has reached zero
       const isComplete = minutesLeft === 0 && secondsLeft === 0;
