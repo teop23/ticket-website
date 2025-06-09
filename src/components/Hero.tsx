@@ -248,7 +248,7 @@ export const Hero: React.FC = () => {
 
             <div className="mt-auto pt-2 text-center">
               {isLaunched && (
-                <Link to="/winners\" className="text-red-600 dark:text-red-400 font-medium hover:opacity-80 transition-opacity text-sm">
+                <Link to="/winners" className="text-red-600 dark:text-red-400 font-medium hover:opacity-80 transition-opacity text-sm">
                   View All Winners →
                 </Link>
               )}
