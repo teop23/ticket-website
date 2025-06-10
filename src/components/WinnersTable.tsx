@@ -15,17 +15,17 @@ interface WinnersTableProps {
 export const WinnersTable: React.FC<WinnersTableProps> = ({ winners, loading = false }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const winnersPerPage = 10;
-  
+
   // Reverse the order so most recent winners appear first
-  const sortedWinners = [...winners].sort((a, b) => 
+  const sortedWinners = [...winners].sort((a, b) =>
     new Date(b.date_added).getTime() - new Date(a.date_added).getTime()
   );
-  
+
   const totalPages = Math.ceil(sortedWinners.length / winnersPerPage);
   const indexOfLastWinner = currentPage * winnersPerPage;
   const indexOfFirstWinner = indexOfLastWinner - winnersPerPage;
   const currentWinners = sortedWinners.slice(indexOfFirstWinner, indexOfLastWinner);
-  
+
   const goToPage = (page: number) => {
     setCurrentPage(Math.min(Math.max(1, page), totalPages));
   };
@@ -87,7 +87,12 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners, loading = f
                     <tr key={index} className="border-b border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                       <td className="py-4 px-6">
                         <span className="whitespace-nowrap">
-                          {new Date(winner.date_added).toLocaleString()}
+                          {(() => { 
+                            const formattedDate = winner.date_added.replace(" ", "T") + "Z";
+                            const offsetDate = new Date(formattedDate); //utc -3
+                            const utcDate = new Date(offsetDate.getTime() + (3 * 60 * 60 * 1000)); // adjust for UTC
+                            return utcDate.toLocaleString();
+                          })()}
                         </span>
                       </td>
                       <td className="py-4 px-6">
@@ -133,14 +138,14 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners, loading = f
                       <span className="text-xs font-medium text-red-600 dark:text-red-400">Complete</span>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center gap-2 mb-3">
                     <Trophy size={16} className="text-red-600 dark:text-red-400" />
                     <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
                       {winner.distributed.toFixed(3)} SOL
                     </span>
                   </div>
-                  
+
                   <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
                     <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Winner Address</div>
                     <a
@@ -155,7 +160,7 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners, loading = f
                       <ExternalLink size={14} className="opacity-50 hover:opacity-100 transition-opacity ml-2 flex-shrink-0" />
                     </a>
                   </div>
-                  
+
                   <div className="text-xs text-gray-400 dark:text-gray-500 mt-2">
                     {new Date(winner.date_added).toLocaleTimeString()}
                   </div>
@@ -169,51 +174,47 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners, loading = f
                 <button
                   onClick={() => goToPage(1)}
                   disabled={currentPage === 1}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${
-                    currentPage === 1
+                  className={`px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${currentPage === 1
                       ? 'text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700 border-gray-200 dark:border-gray-600 cursor-not-allowed'
                       : 'text-white bg-red-600 border-red-700 hover:bg-red-700'
-                  }`}
+                    }`}
                 >
                   First
                 </button>
                 <button
                   onClick={() => goToPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${
-                    currentPage === 1
+                  className={`px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${currentPage === 1
                       ? 'text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700 border-gray-200 dark:border-gray-600 cursor-not-allowed'
                       : 'text-white bg-red-600 border-red-700 hover:bg-red-700'
-                  }`}
+                    }`}
                 >
                   Prev
                 </button>
               </div>
-              
+
               <div className="text-sm text-gray-700 dark:text-gray-300 order-1 sm:order-2">
                 Page {currentPage} of {totalPages}
               </div>
-              
+
               <div className="flex gap-2 order-3">
                 <button
                   onClick={() => goToPage(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${
-                    currentPage === totalPages
+                  className={`px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${currentPage === totalPages
                       ? 'text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700 border-gray-200 dark:border-gray-600 cursor-not-allowed'
                       : 'text-white bg-red-600 border-red-700 hover:bg-red-700'
-                  }`}
+                    }`}
                 >
                   Next
                 </button>
                 <button
                   onClick={() => goToPage(totalPages)}
                   disabled={currentPage === totalPages}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${
-                    currentPage === totalPages
+                  className={`px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${currentPage === totalPages
                       ? 'text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700 border-gray-200 dark:border-gray-600 cursor-not-allowed'
                       : 'text-white bg-red-600 border-red-700 hover:bg-red-700'
-                  }`}
+                    }`}
                 >
                   Last
                 </button>

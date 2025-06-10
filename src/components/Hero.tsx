@@ -212,7 +212,12 @@ export const Hero: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <ShieldCheck size={14} className="text-red-600" />
                       <div className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                        {new Date(winner.date_added).toLocaleString()}
+                        {(() => {
+                          const formattedDate = winner.date_added.replace(" ", "T") + "Z";
+                          const offsetDate = new Date(formattedDate); //utc -3
+                          const utcDate = new Date(offsetDate.getTime() + (3 * 60 * 60 * 1000)); // adjust for UTC
+                          return utcDate.toLocaleString();
+                        })()}
                       </div>
                     </div>
                     <div className="text-xs font-medium font-mono break-all pr-2">
