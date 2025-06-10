@@ -164,18 +164,22 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
       
       const date_added = lastDistribution.date_added.replace(" ", "T") + "Z";
       const offsetLastDistroTime = new Date(date_added);
-      const lastDistroTime = new Date(offsetLastDistroTime.getTime() + (4 * 60 * 60 * 1000));
+      const lastDistroTime = new Date(offsetLastDistroTime.getTime() + (3 * 60 * 60 * 1000));
       
       const currentTime = new Date();
       // Check if the last distribution should have triggered a new drawing by now
       const timeSinceLastDistro = currentTime.getTime() - lastDistroTime.getTime();
+      // console.log("offset last distro time: ", offsetLastDistroTime.toISOString());
+      // console.log("last distro utc: ", lastDistroTime.toISOString());
+      // console.log("current time utc: ", currentTime.toISOString());
+      // console.log("time since last distro (ms): ", timeSinceLastDistro);
       // If more than 60 minutes have passed since the last distribution, we're processing
       const isProcessing = timeSinceLastDistro > (60 * 60 * 1000); // 60 minutes in milliseconds
       const timeUntilNextDrawing = new Date(3600 * 1000 - timeSinceLastDistro);
 
       const minutesLeft = timeUntilNextDrawing.getMinutes();
       const secondsLeft = timeUntilNextDrawing.getSeconds();
-
+      // console.log("time remaining:", minutesLeft, "m", secondsLeft, "s");
       // Check if countdown has reached zero
       const isComplete = minutesLeft === 0 && secondsLeft === 0;
       
