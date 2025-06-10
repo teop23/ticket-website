@@ -15,10 +15,16 @@ interface WinnersTableProps {
 export const WinnersTable: React.FC<WinnersTableProps> = ({ winners, loading = false }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const winnersPerPage = 10;
-  const totalPages = Math.ceil(winners.length / winnersPerPage);
+  
+  // Reverse the order so most recent winners appear first
+  const sortedWinners = [...winners].sort((a, b) => 
+    new Date(b.date_added).getTime() - new Date(a.date_added).getTime()
+  );
+  
+  const totalPages = Math.ceil(sortedWinners.length / winnersPerPage);
   const indexOfLastWinner = currentPage * winnersPerPage;
   const indexOfFirstWinner = indexOfLastWinner - winnersPerPage;
-  const currentWinners = winners.slice(indexOfFirstWinner, indexOfLastWinner);
+  const currentWinners = sortedWinners.slice(indexOfFirstWinner, indexOfLastWinner);
   console.log('Current Winners:', currentWinners);
   const goToPage = (page: number) => {
     setCurrentPage(Math.min(Math.max(1, page), totalPages));
@@ -31,7 +37,7 @@ export const WinnersTable: React.FC<WinnersTableProps> = ({ winners, loading = f
           <h2 className="text-3xl md:text-4xl font-bold text-red-600 dark:text-red-400">Recent Winners</h2>
           {winners.length > 0 && (
             <div className="text-gray-600 dark:text-gray-300 mt-2 md:mt-0">
-              Showing {Math.min(winnersPerPage, winners.length - indexOfFirstWinner)} of {winners.length} distributions
+              Showing {Math.min(winnersPerPage, sortedWinners.length - indexOfFirstWinner)} of {sortedWinners.length} distributions
             </div>
           )}
         </div>
