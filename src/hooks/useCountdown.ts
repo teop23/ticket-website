@@ -184,11 +184,12 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
       const isComplete = minutesLeft === 0 && secondsLeft === 0;
       
       // If countdown just completed, start continuous polling
-      if (isComplete && !hasTriggeredCallbackRef.current && onCountdownCompleteRef.current) {
+      if ((isComplete || isProcessing) && !hasTriggeredCallbackRef.current && onCountdownCompleteRef.current) {
         hasTriggeredCallbackRef.current = true;
         
         // Clear any existing interval
         if (pollingIntervalRef.current) {
+          console.log("Clearing existing polling interval");
           clearInterval(pollingIntervalRef.current);
         }
         
@@ -196,6 +197,7 @@ export const useCountdown = (winners: Winner[], onCountdownComplete?: () => void
         setTimeout(() => {
           onCountdownCompleteRef.current?.();
           pollingIntervalRef.current = setInterval(() => {
+            console.log("Polling for new drawing...");
             onCountdownCompleteRef.current?.();
           }, 15000);
         }, 15000); // Initial 15 second delay, then continuous polling
